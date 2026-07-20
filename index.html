@@ -151,7 +151,7 @@
         .mario-corner-container {
             position: fixed;
             left: 15px;
-            bottom: 50px;
+            bottom: 60px;
             z-index: 20;
             pointer-events: none;
         }
@@ -821,62 +821,48 @@
             for (let r = 0; r <= cwMaxRow; r++) {
                 for (let c = 0; c <= cwMaxCol; c++) {
                     let key = `${r}-${c}`; let cellDiv = document.createElement('div'); cellDiv.className = 'cw-cell';
-                    if (cwGrid[key]) {
-                        let input = document.createElement('input'); input.type = 'text'; input.className = 'cw-input';
-                        input.maxLength = 1; input.dataset.r = r; input.dataset.c = c; input.dataset.key = key;
-                        
-                        /* --- DIPERBAIKI: LOGIKA PERGANTIAN ARAH TTS (CROSSWORD) --- */
-input.addEventListener('focus', e => { 
-    let cd = cwGrid[e.target.dataset.key]; 
-    
-    // Cek apakah arah aktif saat ini valid untuk kotak ini
-    let isCurrentDirValid = cd.clues.some(c => c.dir === activeDirection);
-    
-    // Jika tidak valid (misal: mode 'down' tapi klik kotak yang cuma punya 'across')
-    if (!isCurrentDirValid) {
-        // Otomatis pindah ke arah yang dimiliki kotak tersebut
-        activeDirection = cd.clues[0].dir;
-        document.getElementById('cw-dir-badge').innerText = `MODE: ${activeDirection.toUpperCase()} ${activeDirection==='across'?'➔':'⬇'}`; 
-    } 
-    // JIKA KOTAK INI ADALAH TITIK PERSIMPANGAN (Punya 2 arah)
-    else if (cd.clues.length > 1) {
-        // Cek apakah kotak ini adalah HURUF PERTAMA dari salah satu pertanyaan
-        let isFirstLetterOfAcross = cd.clues.find(c => c.dir === 'across' && c.num === cd.num);
-        let isFirstLetterOfDown = cd.clues.find(c => c.dir === 'down' && c.num === cd.num);
+                                        if (cwGrid[key]) {
+                        let input = document.createElement('input');
+                        input.maxLength = 1;
+                        input.dataset.r = r;
+                        input.dataset.c = c;
+                        input.dataset.key = key;
 
-        // Jika ini kotak No. 1 (yang mendatar), paksa jadi 'across' saat pertama kali di-klik
-        if (isFirstLetterOfAcross && !isFirstLetterOfDown) {
-            activeDirection = 'across';
-        } 
-        // Jika ini kotak nomor yang menurun, paksa jadi 'down'
-        else if (isFirstLetterOfDown && !isFirstLetterOfAcross) {
-            activeDirection = 'down';
-        }
-        
-        // Update badge
-        document.getElementById('cw-dir-badge').innerText = `MODE: ${activeDirection.toUpperCase()} ${activeDirection==='across'?'➔':'⬇'}`;
-    }
-});
+                        // 1. ATUR ARAH OTOMATIS
+                        input.addEventListener('focus', e => {
+                            let cd = cwGrid[e.target.dataset.key];
+                            let isCurrentDirValid = cd.clues.some(c => c.dir === activeDirection);
+                            if (!isCurrentDirValid) {
+                                activeDirection = cd.clues[0].dir;
+                            }
+                            document.getElementById('cw-dir-badge').textContent = activeDirection.toUpperCase();
+                        });
 
-input.addEventListener('input', handleCellInput);
-input.addEventListener('keydown', handleCellKeydown);
+                        // 2. KEMBALIKAN FUNGSI NGETIK & HAPUS (Ini yang tadi hilang!)
+                        input.addEventListener('input', handleCellInput);
+                        input.addEventListener('keydown', handleCellKeydown);
 
-// Klik dua kali pada kotak yang sama untuk memutar arah
-input.addEventListener('click', e => {
-    let cd = cwGrid[e.target.dataset.key];
-    if (cd.clues.length > 1 && document.activeElement === e.target) {
-        activeDirection = activeDirection === 'across' ? 'down' : 'across';
-        document.getElementById('cw-dir-badge').innerText = `MODE: ${activeDirection.toUpperCase()} ${activeDirection==='across'?'➔':'⬇'}`;
-    }
-});
+                        // 3. FUNGSI KLIK (Bisa ganti arah Mendatar/Menurun di kotak persimpangan)
+                        input.addEventListener('click', e => {
+                            let cd = cwGrid[e.target.dataset.key];
+                            if (cd.clues.length > 1) {
+                                activeDirection = activeDirection === 'across' ? 'down' : 'across';
+                                document.getElementById('cw-dir-badge').textContent = activeDirection.toUpperCase();
+                            }
+                        });
 
-                        
                         cellDiv.appendChild(input);
+
+                        // 4. MUNCULIN ANGKA TTS
                         if (cwGrid[key].num) {
-                            let numSpan = document.createElement('span'); numSpan.className = 'cw-num'; numSpan.innerText = cwGrid[key].num; cellDiv.appendChild(numSpan);
+                            let numSpan = document.createElement('span');
+                            numSpan.className = 'cw-num';
+                            numSpan.textContent = cwGrid[key].num;
+                            cellDiv.appendChild(numSpan);
                         }
                     }
                     board.appendChild(cellDiv);
+
                 }
             }
         }
