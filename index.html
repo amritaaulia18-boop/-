@@ -146,11 +146,11 @@
             100% { transform: translateX(120vw); opacity: 0; }
         }
 
-        /* --- MARIO GIF PAS DI ATAS TANAH (BOTTOM 50px) --- */
+        /* --- MARIO GIF PAS DI ATAS TANAH (BOTTOM 48px) --- */
         .mario-corner-container {
             position: fixed;
             left: 15px;
-            bottom: 50px;
+            bottom: 48px;
             z-index: 20;
             pointer-events: none;
         }
@@ -306,6 +306,7 @@
     
     <div id="app-container">
         
+        <!-- SCENE 1: PASSWORD -->
         <div class="scene active" id="scene-1">
             <h1>LEVEL 1:<br>SECRET DOOR✨️</h1>
             <p style="font-family: var(--font-body); font-weight: bold; margin-bottom: 2px;">Selesaikan untuk masuk!</p>
@@ -337,6 +338,7 @@
             <button class="btn" id="btn-s1" style="display: none; background: var(--mario-green);" onclick="openSurpriseAndPlayMusic()">PRESS START ▶</button>
         </div>
 
+        <!-- SCENE 2: CALENDAR -->
         <div class="scene" id="scene-2">
             <h1>SAVE POINT 📅</h1>
             <p style="font-family: var(--font-body); font-weight: bold;">Look who's having a special day!</p>
@@ -352,6 +354,7 @@
             <button class="btn" onclick="triggerPageTransition(2, 3)">NEXT LEVEL</button>
         </div>
 
+        <!-- SCENE 3: MYSTERY BOXES -->
         <div class="scene" id="scene-3">
             <h1>LEVEL 2:<br>MYSTERY BOXES🌟</h1>
             
@@ -372,6 +375,7 @@
             </div>
         </div>
 
+        <!-- SCENE 4: LETTER -->
         <div class="scene" id="scene-4">
             <h1>MESSAGE FROM<br>BOLI💌</h1>
             
@@ -384,7 +388,21 @@
             <button class="btn" id="btn-s4" style="opacity: 0; transition: opacity 0.5s; background: var(--mario-green);" onclick="triggerPageTransition(4, 5)">NEXT LEVEL</button>
         </div>
 
+        <!-- SCENE 5: PUZZLE -->
         <div class="scene" id="scene-5">
+            <h1>LEVEL 3:<br>PIECES OF US 🧩</h1>
+            <p style="font-family: var(--font-body); font-weight: bold; font-size: 0.9rem;">Ketuk 2 kotak untuk menukar posisinya dan susun fotonya!</p>
+            
+            <div id="puzzle-board" style="width: 100%; max-width: 250px; aspect-ratio: 1/1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: #000; border: 4px solid #000; margin-bottom: 20px; box-shadow: 6px 6px 0px rgba(0,0,0,0.5);">
+                <!-- Diisi otomatis oleh JS -->
+            </div>
+
+            <p id="puzzle-msg" style="font-family: var(--font-body); font-size: 1rem; color: var(--mario-yellow); font-weight: bold; min-height: 24px; text-shadow: 2px 2px 0 #000;"></p>
+            <button class="btn" id="btn-s5" style="display: none; background: var(--mario-green);" onclick="triggerPageTransition(5, 6)">NEXT LEVEL</button>
+        </div>
+
+        <!-- SCENE 6: YOUTUBE -->
+        <div class="scene" id="scene-6">
             <h1>MAIN STAGE🎶📼</h1>
             <p style="font-family: var(--font-body); font-size: 0.85rem;">This reminds me of you...</p>
             
@@ -399,10 +417,11 @@
             </div>
 
             <p id="yt-notice" style="font-family: var(--font-body); font-size: 0.75rem; color: var(--mario-yellow);">🔒 Tonton videonya sampai selesai untuk lanjut</p>
-            <button class="btn" id="btn-s5" style="display: none; background: var(--mario-green);" onclick="triggerPageTransition(5, 6)">FINAL BOSS⚔️</button>
+            <button class="btn" id="btn-s6" style="display: none; background: var(--mario-green);" onclick="triggerPageTransition(6, 7)">FINAL BOSS⚔️</button>
         </div>
 
-        <div class="scene" id="scene-6">
+        <!-- SCENE 7: CROSSWORD -->
+        <div class="scene" id="scene-7">
             <h1>FINAL BOSS:<br>MEMORIES ⚔️</h1>
             
             <div class="cw-container">
@@ -417,11 +436,12 @@
                 </div>
                 
                 <h2 id="cw-win-msg" style="display:none; color: var(--mario-yellow); margin-top: 8px;">QUEST COMPLETE👑</h2>
-                <button class="btn" id="btn-s6" style="display: none; background: var(--mario-green); margin-top: 6px;" onclick="triggerPageTransition(6, 7)">VIEW ENDING</button>
+                <button class="btn" id="btn-s7" style="display: none; background: var(--mario-green); margin-top: 6px;" onclick="triggerPageTransition(7, 8)">VIEW ENDING</button>
             </div>
         </div>
 
-        <div class="scene" id="scene-7">
+        <!-- SCENE 8: ENDING -->
+        <div class="scene" id="scene-8">
             <h1 style="font-size: 1.8rem; color: var(--mario-yellow);">YOU WIN!🥇🏆</h1>
             
             <div style="display: flex; gap: 15px; margin-top: 10px; align-items: flex-end; justify-content: center;">
@@ -452,7 +472,8 @@
                 { num: 4, dir: 'across', row: 6, col: 0, answer: 'MAWAR', clue: 'Bunga kesukaan aku' },
                 { num: 5, dir: 'down', row: 3, col: 1, answer: 'MIEAYAM', clue: 'Makanan favorit boli' },
                 { num: 6, dir: 'across', row: 3, col: 6, answer: 'CINDY', clue: 'Nama boneka kucing' }
-            ]
+            ],
+            puzzleImage: "https://iili.io/Cw5Uya2.jpg"
         };
 
         const bgContainer = document.getElementById('bg-decor');
@@ -494,7 +515,7 @@
 
         function onVideoFinished() {
             if (ytWatcherInterval) { clearInterval(ytWatcherInterval); ytWatcherInterval = null; }
-            document.getElementById('btn-s5').style.display = 'inline-flex';
+            document.getElementById('btn-s6').style.display = 'inline-flex';
             document.getElementById('yt-notice').innerText = '✅ Video selesai! Kamu bisa lanjut sekarang.';
             document.getElementById('yt-notice').style.color = 'var(--mario-green)';
         }
@@ -536,6 +557,7 @@
             overlay.style.zIndex = "9999";
 
             if (fromNum === 1 && toNum === 2) {
+                // CURTAIN WIPE (Scene 1 to 2)
                 const s = document.createElement('style');
                 s.id = 'curtainCSS';
                 s.textContent = `
@@ -549,14 +571,10 @@
                         <div style="width:50%;height:100%;background:#E52521;border-left:4px solid #000;animation:curtainRight 1.6s ease-in-out forwards;"></div>
                     </div>`;
                 setTimeout(() => switchSceneDOM(current, next, toNum), 800);
-                setTimeout(() => {
-                    overlay.innerHTML = '';
-                    const old = document.getElementById('curtainCSS');
-                    if (old) old.remove();
-                    isAnimating = false;
-                }, 1600);
+                setTimeout(() => { overlay.innerHTML = ''; const old = document.getElementById('curtainCSS'); if (old) old.remove(); isAnimating = false; }, 1600);
 
             } else if (fromNum === 2 && toNum === 3) {
+                // SHROOM RAIN (Scene 2 to 3)
                 const s = document.createElement('style');
                 s.id = 'shroomRainCSS';
                 s.textContent = `
@@ -566,22 +584,15 @@
                 document.head.appendChild(s);
                 let rainHTML = '';
                 for(let i=0; i<45; i++) {
-                    const leftPos = Math.random() * 100;
-                    const animDur = 0.5 + Math.random() * 0.5;
-                    const animDelay = Math.random() * 0.4;
-                    const sz = 24 + Math.random() * 24;
+                    const leftPos = Math.random() * 100; const animDur = 0.5 + Math.random() * 0.5; const animDelay = Math.random() * 0.4; const sz = 24 + Math.random() * 24;
                     rainHTML += `<div style="position:absolute;left:${leftPos}vw;top:-10vh;font-size:${sz}px;animation:rainFall ${animDur}s linear ${animDelay}s forwards;">🍄</div>`;
                 }
                 overlay.innerHTML = `<div style="position:absolute;inset:0;animation:rainFadeIn 1.6s ease-in-out forwards;overflow:hidden;pointer-events:none;z-index:9999;">${rainHTML}</div>`;
                 setTimeout(() => switchSceneDOM(current, next, toNum), 800);
-                setTimeout(() => {
-                    overlay.innerHTML = '';
-                    const old = document.getElementById('shroomRainCSS');
-                    if (old) old.remove();
-                    isAnimating = false;
-                }, 1600);
+                setTimeout(() => { overlay.innerHTML = ''; const old = document.getElementById('shroomRainCSS'); if (old) old.remove(); isAnimating = false; }, 1600);
 
             } else if (fromNum === 3 && toNum === 4) {
+                // COIN BURST (Scene 3 to 4)
                 const s = document.createElement('style');
                 s.textContent = `
                     @keyframes coinSpinBurst { 0% { transform: scale(0) rotateY(0deg); opacity: 1; } 40% { transform: scale(4.5) rotateY(360deg); opacity: 1; } 70% { transform: scale(4.5) rotateY(720deg); opacity: 1; } 100% { transform: scale(0) rotateY(1080deg); opacity: 0; } }
@@ -591,10 +602,8 @@
                 document.head.appendChild(s);
                 let pHTML = '';
                 for (let i = 0; i < 15; i++) {
-                    const angle = (i / 15) * 360;
-                    const dist = 100 + Math.random() * 80;
-                    const tx = Math.round(Math.cos(angle * Math.PI / 180) * dist);
-                    const ty = Math.round(Math.sin(angle * Math.PI / 180) * dist);
+                    const angle = (i / 15) * 360; const dist = 100 + Math.random() * 80;
+                    const tx = Math.round(Math.cos(angle * Math.PI / 180) * dist); const ty = Math.round(Math.sin(angle * Math.PI / 180) * dist);
                     pHTML += `<div style="position:absolute;font-size:24px;--tx:${tx}px;--ty:${ty}px;animation:partFly 0.8s ease-out 0.4s forwards;">✨</div>`;
                 }
                 overlay.innerHTML = `
@@ -606,6 +615,7 @@
                 setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1600);
 
             } else if (fromNum === 4 && toNum === 5) {
+                // STAR WARP (Scene 4 to 5 / Puzzle)
                 const s = document.createElement('style');
                 s.textContent = `
                     @keyframes starWarpSpin { 0% { transform: scale(0) rotate(0deg); opacity: 1; } 40% { transform: scale(5) rotate(180deg); opacity: 1; } 70% { transform: scale(5) rotate(360deg); opacity: 1; } 100% { transform: scale(0) rotate(540deg); opacity: 0; } }
@@ -624,6 +634,7 @@
                 setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1600);
 
             } else if (fromNum === 5 && toNum === 6) {
+                // PIPE WIPE (Scene 5 to 6 / YouTube)
                 const s = document.createElement('style');
                 s.id = 'pipeCSS';
                 s.textContent = `
@@ -635,14 +646,10 @@
                         <div style="width:120%;height:40px;background:#43B047;border:4px solid #000;border-bottom:none;"></div>
                     </div>`;
                 setTimeout(() => switchSceneDOM(current, next, toNum), 900);
-                setTimeout(() => {
-                    overlay.innerHTML = '';
-                    const old = document.getElementById('pipeCSS');
-                    if (old) old.remove();
-                    isAnimating = false;
-                }, 1800);
+                setTimeout(() => { overlay.innerHTML = ''; const old = document.getElementById('pipeCSS'); if (old) old.remove(); isAnimating = false; }, 1800);
 
             } else if (fromNum === 6 && toNum === 7) {
+                // FLAG POLE (Scene 6 to 7 / Crossword)
                 const s = document.createElement('style');
                 s.textContent = `
                     @keyframes flagSlide { 0% { transform: translateY(-100vh); opacity: 1; } 40% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(100vh); opacity: 0; } }
@@ -651,9 +658,7 @@
                 document.head.appendChild(s);
                 let fw = '';
                 ['🎆','✨','⭐','🎇','💥','🌟','🎉'].forEach((e, i) => {
-                    const x = (Math.random() * 220) - 110;
-                    const y = (Math.random() * 200) - 150;
-                    const d = 0.3 + Math.random() * 0.5;
+                    const x = (Math.random() * 220) - 110; const y = (Math.random() * 200) - 150; const d = 0.3 + Math.random() * 0.5;
                     fw += `<div style="position:absolute;font-size:22px;--fx:${x}px;--fy:${y}px;animation:fwPop 0.9s ease-out ${d}s forwards;">${e}</div>`;
                 });
                 overlay.innerHTML = `
@@ -666,7 +671,7 @@
                 setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 2100);
 
             } else {
-                overlay.innerHTML = '<div class="pipe-wipe"></div>';
+                overlay.innerHTML = '<div style="position:absolute;bottom:-100vh;width:100vw;height:100vh;background:var(--mario-green);border-top:30px solid #235925;animation:pipeWipeAnim 1.4s ease-in-out forwards;"></div>';
                 setTimeout(() => switchSceneDOM(current, next, toNum), 700);
                 setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1400);
             }
@@ -680,19 +685,84 @@
         }
 
         let calendarRendered = false;
+        let letterTyped = false;
+        let puzzleRendered = false;
+        let cwRendered = false; 
+
         function triggerSceneLogic(num) {
             if (num === 2 && !calendarRendered) renderCalendar();
             if (num === 4 && !letterTyped) typeLetter();
-            if (num === 6 && !cwRendered) initCrossword();
+            if (num === 5 && !puzzleRendered) { puzzleRendered = true; initPuzzle(); }
+            if (num === 7 && !cwRendered) initCrossword();
             
             const bgm = document.getElementById('bg-music');
-            if (num === 5) {
+            if (num === 6) { 
                 bgm.pause();
             } else if (num >= 2) {
                 bgm.play().catch(function(e) {});
             }
         }
 
+        // --- SISTEM PUZZLE SWAP (SCENE 5) ---
+        let puzzlePieces = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        let puzzleSelected = null;
+        let puzzleSolved = false;
+
+        function initPuzzle() {
+            do { puzzlePieces.sort(() => Math.random() - 0.5); } while (checkPuzzleSolved(false));
+            renderPuzzle();
+        }
+
+        function renderPuzzle() {
+            const board = document.getElementById('puzzle-board');
+            board.innerHTML = '';
+            puzzlePieces.forEach((p, index) => {
+                let div = document.createElement('div');
+                div.style.width = '100%'; div.style.height = '100%';
+                div.style.backgroundImage = `url(${CONFIG.puzzleImage})`;
+                div.style.backgroundSize = '300% 300%';
+                let bx = (p % 3) * 50; let by = Math.floor(p / 3) * 50;
+                div.style.backgroundPosition = `${bx}% ${by}%`;
+                div.style.cursor = 'pointer'; div.style.transition = 'transform 0.2s ease, box-shadow 0.2s';
+                
+                if (index === puzzleSelected) {
+                    div.style.transform = 'scale(0.85)';
+                    div.style.boxShadow = '0 0 10px var(--mario-yellow)';
+                    div.style.zIndex = '5';
+                }
+                div.onclick = () => handlePuzzleClick(index);
+                board.appendChild(div);
+            });
+        }
+
+        function handlePuzzleClick(index) {
+            if (puzzleSolved) return;
+            if (puzzleSelected === null) { puzzleSelected = index; renderPuzzle(); } 
+            else {
+                if (puzzleSelected !== index) {
+                    let temp = puzzlePieces[puzzleSelected];
+                    puzzlePieces[puzzleSelected] = puzzlePieces[index];
+                    puzzlePieces[index] = temp;
+                }
+                puzzleSelected = null;
+                renderPuzzle();
+                checkPuzzleSolved(true);
+            }
+        }
+
+        function checkPuzzleSolved(showMsg) {
+            let isSolved = true;
+            for(let i = 0; i < 9; i++) { if (puzzlePieces[i] !== i) isSolved = false; }
+            if (isSolved && showMsg) {
+                puzzleSolved = true;
+                document.getElementById('puzzle-msg').innerText = "FOTO UDAH RAPI! ✨";
+                document.getElementById('btn-s5').style.display = "inline-flex";
+                document.getElementById('puzzle-board').style.gap = '0px';
+            }
+            return isSolved;
+        }
+
+        // --- SISTEM PASSWORD ---
         let pwdInput = "";
         function inputPwd(val) {
             const msgObj = document.getElementById('pwd-msg');
@@ -719,22 +789,17 @@
             
             if (pwdInput === CONFIG.password) {
                 msgObj.innerText = "YAYY... ACCESS GRANTED💖";
-                msgObj.style.opacity = 1;
-                msgObj.style.color = "var(--mario-yellow)";
+                msgObj.style.opacity = 1; msgObj.style.color = "var(--mario-yellow)";
                 document.getElementById('btn-s1').style.display = "inline-flex";
             } else {
                 displayObj.classList.add('shake');
-                msgObj.innerHTML = "INCORRECT!💀<br><span style='font-size:0.8rem; color:var(--white); font-weight:normal;'>Oopss... tanggal lahir kamu (DDMM)</span>";
-                msgObj.style.opacity = 1;
-                msgObj.style.color = "#000";
-                setTimeout(function() {
-                    displayObj.classList.remove('shake');
-                    pwdInput = "";
-                    updatePwdDisplay();
-                }, 1200);
+                msgObj.innerHTML = "INCORRECT!💀<br><span style='font-size:0.75rem; color:var(--white); font-weight:normal;'>Oopss... tanggal lahir kamu (DDMM)</span>";
+                msgObj.style.opacity = 1; msgObj.style.color = "#000";
+                setTimeout(function() { displayObj.classList.remove('shake'); pwdInput = ""; updatePwdDisplay(); }, 1200);
             }
         }
 
+        // --- SISTEM CALENDAR ---
         function renderCalendar() {
             calendarRendered = true;
             document.getElementById('cal-month-year').innerText = `${CONFIG.birthday.monthName} ${CONFIG.birthday.year}`;
@@ -749,6 +814,7 @@
             }
         }
 
+        // --- SISTEM MYSTERY BOXES ---
         let blocksHit = 0;
         function hitBlock(el, index) {
             if(!el.classList.contains('active')) {
@@ -757,7 +823,7 @@
             }
         }
 
-        let letterTyped = false;
+        // --- SISTEM SURAT (TYPEWRITER) ---
         function typeLetter() {
             letterTyped = true;
             const container = document.getElementById('tw-text'); const textHTML = CONFIG.loveLetter;
@@ -782,7 +848,8 @@
             typeNext();
         }
 
-        let cwRendered = false; let cwGrid = {}; let cwMaxRow = 0; let cwMaxCol = 0; let activeDirection = 'across'; 
+        // --- SISTEM CROSSWORD (TTS) ---
+        let cwGrid = {}; let cwMaxRow = 0; let cwMaxCol = 0; let activeDirection = 'across'; 
 
         function initCrossword() {
             cwRendered = true;
@@ -817,15 +884,24 @@
                         let input = document.createElement('input'); input.type = 'text'; input.className = 'cw-input';
                         input.maxLength = 1; input.dataset.r = r; input.dataset.c = c; input.dataset.key = key;
                         
-                        /* --- DIPERBAIKI: PRIORITASKAN ARAH 'ACROSS' JIKA KOTAK PUNYA PILIHAN GANDA --- */
+                        /* --- LOGIKA PERGANTIAN ARAH TTS (CROSSWORD) FIXED --- */
                         input.addEventListener('focus', e => { 
                             let cd = cwGrid[e.target.dataset.key]; 
-                            let hasAcross = cd.clues.some(c => c.dir === 'across');
                             let isCurrentDirValid = cd.clues.some(c => c.dir === activeDirection);
                             
                             if (!isCurrentDirValid) {
-                                activeDirection = hasAcross ? 'across' : cd.clues[0].dir;
+                                activeDirection = cd.clues[0].dir;
                                 document.getElementById('cw-dir-badge').innerText = `MODE: ${activeDirection.toUpperCase()} ${activeDirection==='across'?'➔':'⬇'}`; 
+                            } else if (cd.clues.length > 1) {
+                                let isFirstLetterOfAcross = cd.clues.find(c => c.dir === 'across' && c.num === cd.num);
+                                let isFirstLetterOfDown = cd.clues.find(c => c.dir === 'down' && c.num === cd.num);
+
+                                if (isFirstLetterOfAcross && !isFirstLetterOfDown) {
+                                    activeDirection = 'across';
+                                } else if (isFirstLetterOfDown && !isFirstLetterOfAcross) {
+                                    activeDirection = 'down';
+                                }
+                                document.getElementById('cw-dir-badge').innerText = `MODE: ${activeDirection.toUpperCase()} ${activeDirection==='across'?'➔':'⬇'}`;
                             }
                         });
                         
@@ -878,14 +954,14 @@
         }
         function validateBoard() {
             let allCorrect = true; let inputs = document.querySelectorAll('.cw-input');
-        inputs.forEach(inp => {
+            inputs.forEach(inp => {
                 let key = inp.dataset.key;
                 if (inp.value.toUpperCase() === cwGrid[key].answer) inp.classList.add('correct');
                 else { inp.classList.remove('correct'); allCorrect = false; }
             });
             if (allCorrect && inputs.length > 0) {
                 document.getElementById('cw-win-msg').style.display = 'block';
-                document.getElementById('btn-s6').style.display = 'inline-flex';
+                document.getElementById('btn-s7').style.display = 'inline-flex';
                 inputs.forEach(i => i.disabled = true); 
             }
         }
