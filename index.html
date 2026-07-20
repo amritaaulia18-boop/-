@@ -40,51 +40,57 @@
             position: relative;
         }
 
-        /* --- DEKORASI LATAR BELAKANG (TANAH, RUMPUT, PIPA, AWAN, ITEM JATUH) --- */
-        .bg-decorations {
+        /* --- BACKGROUND TITIK PUTIH KECIL (PATTERN) --- */
+        .dot-pattern {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
             z-index: 1;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.3) 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
         }
 
-        /* Tanah & Garis Rumput Hijau di Bawah */
+        .bg-decorations {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
         .ground-base {
             position: fixed;
-            bottom: 0; left: 0; width: 100%; height: 60px;
+            bottom: 0; left: 0; width: 100%; height: 50px;
             background: #D2691E;
-            border-top: 6px solid #43B047;
-            z-index: 1;
+            border-top: 5px solid #43B047;
+            z-index: 3;
         }
 
-        /* Pipa Hijau Ala Mario */
         .mario-pipe {
             position: fixed;
-            bottom: 60px; right: 10%;
-            width: 60px; height: 50px;
+            bottom: 50px; right: 8%;
+            width: 50px; height: 40px;
             background: #43B047;
             border: 3px solid #000;
             border-bottom: none;
-            z-index: 2;
+            z-index: 4;
         }
         .mario-pipe-top {
             position: fixed;
-            bottom: 106px; right: calc(10% - 4px);
-            width: 68px; height: 20px;
+            bottom: 87px; right: calc(8% - 4px);
+            width: 58px; height: 16px;
             background: #43B047;
             border: 3px solid #000;
-            z-index: 2;
+            z-index: 4;
         }
 
-        /* Animasi Item Jatuh dari Atas ke Bawah */
         .floating-item {
             position: absolute; 
             top: -5vh; 
-            font-size: 20px; 
+            font-size: 18px; 
             opacity: 0.7;
             animation: floatDown linear infinite; 
             filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.5));
-            z-index: 1;
+            z-index: 2;
         }
         @keyframes floatDown {
             0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0; }
@@ -93,15 +99,14 @@
             100% { transform: translateY(110vh) scale(1.2) rotate(20deg); opacity: 0; }
         }
 
-        /* Animasi Awan Bergerak dari Kiri ke Kanan */
         .cloud-item {
             position: absolute; 
             left: -10vw; 
-            font-size: 35px; 
+            font-size: 30px; 
             opacity: 0.8;
             animation: moveRight linear infinite; 
             filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.3));
-            z-index: 1;
+            z-index: 2;
         }
         @keyframes moveRight {
             0% { transform: translateX(0); opacity: 0; }
@@ -110,16 +115,15 @@
             100% { transform: translateX(120vw); opacity: 0; }
         }
 
-        /* Posisi Mario Agar Pas Napak di Atas Garis Rumput */
         .mario-corner-container {
             position: fixed;
-            left: 15px;
-            bottom: 56px; /* Pas di atas garis rumput */
+            left: 10px;
+            bottom: 48px;
             z-index: 20;
             pointer-events: none;
         }
         .mario-corner-gif {
-            width: 75px;
+            width: 65px;
             height: auto;
             image-rendering: pixelated;
         }
@@ -135,77 +139,79 @@
             margin: 0 auto; background-color: transparent; z-index: 10;
             display: flex; flex-direction: column;
         }
+        
+        /* SCENE DIBUAT FLEXIBLE & AMAN UNTUK LAYAR PENDEK */
         .scene {
-            display: none; flex-direction: column; align-items: center; justify-content: center;
-            width: 100%; height: 100%; padding: 20px;
+            display: none; flex-direction: column; align-items: center; justify-content: flex-start;
+            width: 100%; height: 100%; padding: 15px 15px 65px 15px;
             position: absolute; top: 0; left: 0;
             overflow-y: auto; overflow-x: hidden;
             background: transparent;
         }
         .scene.active { display: flex; z-index: 10; }
 
-        h1, h2, h3 { font-family: var(--font-retro); color: var(--white); text-align: center; margin-bottom: 15px; text-shadow: 3px 3px 0px #000; line-height: 1.5; }
-        h1 { font-size: 1.3rem; }
-        h2 { font-size: 1.1rem; }
-        p { text-align: center; font-size: 1.1rem; margin-bottom: 15px; font-weight: 800; color: var(--white); text-shadow: 2px 2px 0px #000; }
+        h1, h2, h3 { font-family: var(--font-retro); color: var(--white); text-align: center; margin-bottom: 8px; text-shadow: 2px 2px 0px #000; line-height: 1.3; }
+        h1 { font-size: 1.1rem; }
+        h2 { font-size: 1rem; }
+        p { text-align: center; font-size: 0.95rem; margin-bottom: 8px; font-weight: 800; color: var(--white); text-shadow: 2px 2px 0px #000; }
 
         .btn {
-            background-color: var(--mario-red); color: var(--white); border: 4px solid #000; padding: 12px 20px;
-            font-family: var(--font-retro); font-size: 0.75rem; cursor: pointer; box-shadow: inset -4px -4px 0px rgba(0,0,0,0.3);
+            background-color: var(--mario-red); color: var(--white); border: 3px solid #000; padding: 10px 16px;
+            font-family: var(--font-retro); font-size: 0.65rem; cursor: pointer; box-shadow: inset -3px -3px 0px rgba(0,0,0,0.3);
             text-transform: uppercase; transition: transform 0.1s; display: inline-flex; align-items: center; justify-content: center;
-            margin-top: 15px; text-shadow: 2px 2px 0px #000;
+            margin-top: 10px; text-shadow: 1px 1px 0px #000;
         }
-        .btn:active { transform: scale(0.95); box-shadow: inset 4px 4px 0px rgba(0,0,0,0.3); }
+        .btn:active { transform: scale(0.95); box-shadow: inset 3px 3px 0px rgba(0,0,0,0.3); }
 
-        .password-display { display: flex; gap: 8px; margin: 10px 0 15px; }
+        .password-display { display: flex; gap: 6px; margin: 5px 0 10px; }
         .pwd-box {
-            width: 45px; height: 45px; background: var(--mario-yellow); border: 4px solid #000;
-            display: flex; align-items: center; justify-content: center; font-family: var(--font-retro); font-size: 18px; color: #000;
-            box-shadow: inset -4px -4px 0px #c5a600;
+            width: 38px; height: 38px; background: var(--mario-yellow); border: 3px solid #000;
+            display: flex; align-items: center; justify-content: center; font-family: var(--font-retro); font-size: 16px; color: #000;
+            box-shadow: inset -3px -3px 0px #c5a600;
         }
-        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 80%; max-width: 230px; }
+        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: 100%; max-width: 210px; }
         .key {
-            width: 50px; height: 50px; background: var(--mario-brown); border: 4px solid #000;
-            display: flex; align-items: center; justify-content: center; font-family: var(--font-retro); font-size: 1rem; color: var(--white);
-            cursor: pointer; margin: 0 auto; box-shadow: inset -4px -4px 0px #5c2c09; text-shadow: 2px 2px 0px #000;
+            width: 44px; height: 44px; background: var(--mario-brown); border: 3px solid #000;
+            display: flex; align-items: center; justify-content: center; font-family: var(--font-retro); font-size: 0.9rem; color: var(--white);
+            cursor: pointer; margin: 0 auto; box-shadow: inset -3px -3px 0px #5c2c09; text-shadow: 2px 2px 0px #000;
         }
-        .key:active { transform: scale(0.9); box-shadow: inset 4px 4px 0px #5c2c09; }
-        .key.action { background: #555; box-shadow: inset -4px -4px 0px #222;}
+        .key:active { transform: scale(0.9); box-shadow: inset 3px 3px 0px #5c2c09; }
+        .key.action { background: #555; box-shadow: inset -3px -3px 0px #222;}
         .shake { animation: shake 0.5s; }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-10px); } 40%, 80% { transform: translateX(10px); } }
 
         .calendar-card {
-            background: #fff; border: 6px solid #000; padding: 20px; box-shadow: 8px 8px 0px rgba(0,0,0,0.5); width: 90%; margin-bottom: 20px;
+            background: #fff; border: 5px solid #000; padding: 12px; box-shadow: 6px 6px 0px rgba(0,0,0,0.5); width: 85%; max-width: 300px; margin-bottom: 10px;
         }
         .cal-header {
-            background: var(--mario-red); color: white; padding: 10px; font-family: var(--font-retro); font-size: 0.8rem; text-align: center;
-            border: 4px solid #000; margin-bottom: 15px; text-shadow: 2px 2px 0px #000;
+            background: var(--mario-red); color: white; padding: 8px; font-family: var(--font-retro); font-size: 0.7rem; text-align: center;
+            border: 3px solid #000; margin-bottom: 10px; text-shadow: 1px 1px 0px #000;
         }
-        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; font-family: var(--font-body); font-weight: bold; color: #000;}
-        .cal-day-name { font-size: 0.8rem; margin-bottom: 5px; color: #666;}
-        .cal-date { padding: 8px 0; font-size: 1rem; position: relative;}
+        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-family: var(--font-body); font-weight: bold; color: #000;}
+        .cal-day-name { font-size: 0.7rem; margin-bottom: 3px; color: #666;}
+        .cal-date { padding: 6px 0; font-size: 0.85rem; position: relative;}
         .cal-date.special { background: var(--mario-yellow); border: 2px solid #000; color: #000; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
-        .hearts-container { display: flex; gap: 15px; margin: 30px 0; }
+        .hearts-container { display: flex; gap: 12px; margin: 15px 0; }
         .mario-block {
-            width: 60px; height: 60px; background: var(--mario-yellow); border: 4px solid #000; display: flex; align-items: center; justify-content: center;
-            font-family: var(--font-retro); font-size: 24px; color: #c5a600; cursor: pointer; box-shadow: inset -4px -4px 0px #c5a600; transition: transform 0.1s;
+            width: 50px; height: 50px; background: var(--mario-yellow); border: 3px solid #000; display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-retro); font-size: 20px; color: #c5a600; cursor: pointer; box-shadow: inset -3px -3px 0px #c5a600; transition: transform 0.1s;
         }
-        .mario-block.active { background: #a06b3a; color: transparent; box-shadow: inset 4px 4px 0px #614022; transform: translateY(-10px); }
+        .mario-block.active { background: #a06b3a; color: transparent; box-shadow: inset 3px 3px 0px #614022; transform: translateY(-8px); }
         .secret-paper {
-            background: #fff; padding: 25px; border: 6px solid #000; margin-bottom: 20px; display: none; width: 90%; box-shadow: 8px 8px 0px rgba(0,0,0,0.5);
+            background: #fff; padding: 15px; border: 5px solid #000; margin-bottom: 10px; display: none; width: 90%; max-width: 320px; box-shadow: 6px 6px 0px rgba(0,0,0,0.5);
         }
-        .secret-paper p { color: #000; text-shadow: none; font-family: var(--font-body); font-size: 1.1rem; text-align: left; }
+        .secret-paper p { color: #000; text-shadow: none; font-family: var(--font-body); font-size: 0.95rem; text-align: left; }
         .secret-paper.show { display: block; animation: popUp 0.3s forwards; }
         @keyframes popUp { 0% { transform: scale(0.5); } 100% { transform: scale(1); } }
 
-        .letter-container { background: #fff; width: 90%; height: 50%; border: 6px solid #000; padding: 30px 20px; box-shadow: 8px 8px 0px rgba(0,0,0,0.5); overflow-y: auto; }
-        .typewriter-text { font-family: var(--font-retro); font-size: 0.8rem; line-height: 1.8; color: #000; text-shadow: none; min-height: 100%; text-align: left; }
+        .letter-container { background: #fff; width: 90%; max-width: 340px; height: 42vh; border: 5px solid #000; padding: 15px; box-shadow: 6px 6px 0px rgba(0,0,0,0.5); overflow-y: auto; }
+        .typewriter-text { font-family: var(--font-retro); font-size: 0.65rem; line-height: 1.6; color: #000; text-shadow: none; min-height: 100%; text-align: left; }
         .typing-cursor::after { content: '█'; animation: blink 1s step-end infinite; }
 
-        .video-wrapper { width: 90%; background: #fff; padding: 15px; border: 6px solid #000; box-shadow: 8px 8px 0px rgba(0,0,0,0.5); margin-bottom: 20px; position: relative; }
-        .iframe-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 4px solid #000; }
+        .video-wrapper { width: 90%; max-width: 320px; background: #fff; padding: 10px; border: 5px solid #000; box-shadow: 6px 6px 0px rgba(0,0,0,0.5); margin-bottom: 10px; position: relative; }
+        .iframe-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 3px solid #000; }
         .iframe-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;}
 
         .mystery-cover {
@@ -215,48 +221,44 @@
             border: 2px solid #000;
             cursor: pointer;
         }
-        .mystery-cover span { font-family: var(--font-retro); font-size: 40px; color: #8B4513; text-shadow: 3px 3px 0 #000; }
-        .mystery-cover p { font-family: var(--font-body); font-size: 0.9rem; color: #000; text-shadow: none; margin-top: 10px; margin-bottom: 0; }
+        .mystery-cover span { font-family: var(--font-retro); font-size: 32px; color: #8B4513; text-shadow: 2px 2px 0 #000; }
+        .mystery-cover p { font-family: var(--font-body); font-size: 0.8rem; color: #000; text-shadow: none; margin-top: 5px; margin-bottom: 0; }
         .iframe-container.revealed .mystery-cover { display: none; }
 
-        .cw-container { width: 100%; display: flex; flex-direction: column; align-items: center; padding-bottom: 20px;}
-        .cw-board { position: relative; padding: 10px; margin-bottom: 20px; display: grid; gap: 0px; background-color: transparent; }
-        .cw-cell { width: 32px; height: 32px; background: transparent; position: relative; }
+        .cw-container { width: 100%; display: flex; flex-direction: column; align-items: center; padding-bottom: 10px;}
+        .cw-board { position: relative; padding: 5px; margin-bottom: 10px; display: grid; gap: 0px; background-color: transparent; }
+        .cw-cell { width: 28px; height: 28px; background: transparent; position: relative; }
         .cw-input {
-            width: 100%; height: 100%; background: #fff; border: 2px solid #000; text-align: center; font-size: 1rem; font-family: var(--font-retro);
+            width: 100%; height: 100%; background: #fff; border: 2px solid #000; text-align: center; font-size: 0.85rem; font-family: var(--font-retro);
             font-weight: bold; color: #000; text-transform: uppercase; outline: none; caret-color: var(--mario-red); padding: 0; border-radius: 0;
         }
         .cw-input:focus { background: var(--mario-yellow); box-shadow: inset 0 0 0 2px var(--mario-red); z-index: 5; position: relative;}
         .cw-input.correct { background: var(--mario-green); color: #fff; }
-        .cw-num { position: absolute; top: 2px; left: 2px; font-size: 8px; font-family: var(--font-body); font-weight: bold; color: #000; z-index: 2; pointer-events: none;}
-        .cw-clues { width: 90%; background: #fff; padding: 15px; border: 4px solid #000; font-family: var(--font-body); font-size: 0.9rem; color: #000; box-shadow: 6px 6px 0px rgba(0,0,0,0.5);}
-        .cw-clues h4 { color: var(--mario-red); margin-bottom: 5px; font-family: var(--font-retro); font-size: 0.6rem; text-shadow: none;}
-        .cw-clues ul { list-style: none; padding-left: 0; margin-bottom: 10px; text-align: left;}
-        .cw-clues li { margin-bottom: 5px; font-weight: bold;}
-        .dir-badge { background: var(--mario-blue); color: white; border: 4px solid #000; padding: 8px 12px; font-family: var(--font-retro); font-size: 0.6rem; margin-bottom: 10px; text-shadow: 1px 1px 0px #000; }
-
-        @media (max-width: 380px) { .cw-cell { width: 28px; height: 28px; } .cw-input { font-size: 0.8rem; } }
+        .cw-num { position: absolute; top: 1px; left: 1px; font-size: 7px; font-family: var(--font-body); font-weight: bold; color: #000; z-index: 2; pointer-events: none;}
+        .cw-clues { width: 90%; max-width: 320px; background: #fff; padding: 10px; border: 4px solid #000; font-family: var(--font-body); font-size: 0.8rem; color: #000; box-shadow: 5px 5px 0px rgba(0,0,0,0.5);}
+        .cw-clues h4 { color: var(--mario-red); margin-bottom: 3px; font-family: var(--font-retro); font-size: 0.55rem; text-shadow: none;}
+        .cw-clues ul { list-style: none; padding-left: 0; margin-bottom: 5px; text-align: left;}
+        .cw-clues li { margin-bottom: 3px; font-weight: bold;}
+        .dir-badge { background: var(--mario-blue); color: white; border: 3px solid #000; padding: 5px 10px; font-family: var(--font-retro); font-size: 0.55rem; margin-bottom: 8px; text-shadow: 1px 1px 0px #000; }
     </style>
 </head>
 <body>
 
     <div id="transition-overlay"></div>
     
-    <!-- Audio Latar Belakang (Hanya Berjalan Saat Kode Benar) -->
     <audio id="bg-music" loop>
         <source src="https://www.dropbox.com/scl/fi/7sm934r67ibilxsipf09w/aud-20200808-wa0503_M94TamhK.mp3?rlkey=t5y6cgimg5ew8tn6cev63z0bp&st=regmda3j&dl=1" type="audio/mpeg">
     </audio>
 
     <div id="yt-player" style="display: none; position: absolute; top: -9999px;"></div>
 
-    <!-- DEKORASI LENGKAP: Tanah, Rumput, Pipa, Awan, Item Jatuh -->
+    <!-- BACKGROUND DOTS & DEKORASI LENGKAP -->
+    <div class="dot-pattern"></div>
     <div class="ground-base"></div>
     <div class="mario-pipe-top"></div>
     <div class="mario-pipe"></div>
-
     <div class="bg-decorations" id="bg-decor"></div>
 
-    <!-- MARIO DI POJOK (Napak di Rumput) -->
     <div class="mario-corner-container">
         <img src="https://iili.io/CwTDXCF.gif" alt="Mario" class="mario-corner-gif">
     </div>
@@ -265,9 +267,9 @@
         
         <div class="scene active" id="scene-1">
             <h1>LEVEL 1:<br>SECRET DOOR✨️</h1>
-            <p style="font-family: var(--font-body); font-weight: bold; margin-bottom: 5px;">Selesaikan untuk masuk!</p>
+            <p style="font-family: var(--font-body); font-weight: bold; margin-bottom: 3px;">Selesaikan untuk masuk!</p>
             
-            <p style="font-family: var(--font-retro); font-size: 0.75rem; margin-top: 5px; margin-bottom: 5px; color: var(--mario-yellow);">ENTER CODE</p>
+            <p style="font-family: var(--font-retro); font-size: 0.65rem; margin-top: 2px; margin-bottom: 3px; color: var(--mario-yellow);">ENTER CODE</p>
             <div class="password-display" id="pwd-display">
                 <div class="pwd-box" id="pb-0"></div>
                 <div class="pwd-box" id="pb-1"></div>
@@ -290,7 +292,7 @@
                 <div class="key action" onclick="inputPwd('B')">⌫</div>
             </div>
 
-            <p id="pwd-msg" style="margin-top: 10px; color: var(--mario-yellow); min-height: 40px; transition: opacity 0.3s; opacity: 0; font-family: var(--font-body); line-height: 1.3; font-size: 0.95rem;"></p>
+            <p id="pwd-msg" style="margin-top: 5px; color: var(--mario-yellow); min-height: 30px; transition: opacity 0.3s; opacity: 0; font-family: var(--font-body); line-height: 1.2; font-size: 0.85rem;"></p>
             <button class="btn" id="btn-s1" style="display: none; background: var(--mario-green);" onclick="openSurpriseAndPlayMusic()">PRESS START ▶</button>
         </div>
 
@@ -323,7 +325,7 @@
                 <p>
                     Hi birthday boy...<br><br>Welcome to your personal game! Get ready for the next stage. ♡
                 </p>
-                <div style="text-align: center; margin-top: 15px;">
+                <div style="text-align: center; margin-top: 10px;">
                     <button class="btn" onclick="triggerPageTransition(3, 4)">NEXT LEVEL</button>
                 </div>
             </div>
@@ -332,7 +334,7 @@
         <div class="scene" id="scene-4">
             <h1>MESSAGE FROM<br>BOLI💌</h1>
             
-            <img src="https://iili.io/CwuwFDB.jpg" style="width: 180px; max-width: 50%; border: 6px solid #000; box-shadow: 8px 8px 0px rgba(0,0,0,0.5); margin-bottom: 10px; border-radius: 4px;" alt="Us">
+            <img src="https://iili.io/CwuwFDB.jpg" style="width: 130px; max-width: 40%; border: 4px solid #000; box-shadow: 6px 6px 0px rgba(0,0,0,0.5); margin-bottom: 8px; border-radius: 4px;" alt="Us">
 
             <div class="letter-container">
                 <div class="typewriter-text" id="tw-text"></div>
@@ -343,7 +345,7 @@
 
         <div class="scene" id="scene-5">
             <h1>MAIN STAGE🎶📼</h1>
-            <p style="font-family: var(--font-body); font-size: 1rem;">This reminds me of you...</p>
+            <p style="font-family: var(--font-body); font-size: 0.9rem;">This reminds me of you...</p>
             
             <div class="video-wrapper">
                 <div class="iframe-container" id="yt-box">
@@ -355,7 +357,7 @@
                 </div>
             </div>
 
-            <p id="yt-notice" style="font-family: var(--font-body); font-size: 0.9rem; color: var(--mario-yellow);">🔒 Tonton videonya sampai selesai untuk lanjut</p>
+            <p id="yt-notice" style="font-family: var(--font-body); font-size: 0.85rem; color: var(--mario-yellow);">🔒 Tonton videonya sampai selesai untuk lanjut</p>
             <button class="btn" id="btn-s5" style="display: none; background: var(--mario-green);" onclick="triggerPageTransition(5, 6)">FINAL BOSS⚔️</button>
         </div>
 
@@ -373,20 +375,20 @@
                     <ul id="cw-down-list"></ul>
                 </div>
                 
-                <h2 id="cw-win-msg" style="display:none; color: var(--mario-yellow); margin-top: 15px;">QUEST COMPLETE👑</h2>
-                <button class="btn" id="btn-s6" style="display: none; background: var(--mario-green); margin-top: 10px;" onclick="triggerPageTransition(6, 7)">VIEW ENDING</button>
+                <h2 id="cw-win-msg" style="display:none; color: var(--mario-yellow); margin-top: 10px;">QUEST COMPLETE👑</h2>
+                <button class="btn" id="btn-s6" style="display: none; background: var(--mario-green); margin-top: 8px;" onclick="triggerPageTransition(6, 7)">VIEW ENDING</button>
             </div>
         </div>
 
         <div class="scene" id="scene-7">
-            <h1>YOU WIN!🥇🏆</h1>
+            <h1 style="font-size: 2rem; color: var(--mario-yellow);">YOU WIN!🥇🏆</h1>
             
             <div style="display: flex; gap: 15px; margin-top: 10px; align-items: flex-end;">
-                <img src="https://iili.io/CwTDXCF.gif" style="height: 100px; transform: scaleX(-1);" alt="Mario">
-                <img src="https://iili.io/CwTDXCF.gif" style="height: 120px;" alt="Peach">
+                <img src="https://iili.io/CwTDXCF.gif" style="height: 90px; transform: scaleX(-1);" alt="Mario">
+                <img src="https://iili.io/CwTDXCF.gif" style="height: 100px;" alt="Peach">
             </div>
 
-            <button class="btn" style="background: var(--mario-green); margin-top: 40px; font-size: 1rem;" onclick="location.reload()">REPLAY GAME ↺</button>
+            <button class="btn" style="background: var(--mario-green); margin-top: 25px; font-size: 0.9rem;" onclick="location.reload()">REPLAY GAME ↺</button>
         </div>
 
     </div>
@@ -412,10 +414,9 @@
             ]
         };
 
-        // --- GENERATOR DEKORASI AWAN & ITEM JATUH OTOMATIS ---
         const bgContainer = document.getElementById('bg-decor');
         const retroItems = ['⭐', '🍄', '❤️'];
-        for(let i=0; i<12; i++) {
+        for(let i=0; i<10; i++) {
             let h = document.createElement('div');
             h.innerHTML = retroItems[Math.floor(Math.random() * retroItems.length)];
             h.className = 'floating-item';
@@ -424,7 +425,7 @@
             h.style.animationDelay = (Math.random() * 5) + 's';
             bgContainer.appendChild(h);
         }
-        for(let i=0; i<5; i++) {
+        for(let i=0; i<4; i++) {
             let cloud = document.createElement('div');
             cloud.innerHTML = '☁️';
             cloud.className = 'cloud-item';
@@ -457,7 +458,6 @@
             document.getElementById('yt-notice').style.color = 'var(--mario-green)';
         }
 
-        let ytVisualPlayerInstance;
         function onYouTubeIframeAPIReady() {
             ytVisualPlayer = new YT.Player('yt-visual', {
                 height: '100%', width: '100%', videoId: CONFIG.visualYouTubeId,
@@ -475,11 +475,10 @@
             });
         }
 
-        // --- MUSIK HANYA JALAN PAS KODE BENAR (TIDAK BENTROK) ---
         function openSurpriseAndPlayMusic() {
             const bgm = document.getElementById('bg-music');
             bgm.volume = 0.5;
-            bgm.play().catch(function(e) { console.log('Autoplay blocked:', e); });
+            bgm.play().catch(function(e) {});
             triggerPageTransition(1, 2);
         }
 
@@ -494,117 +493,24 @@
             isAnimating = true;
             const overlay = document.getElementById('transition-overlay');
             overlay.style.zIndex = "9999";
+            overlay.innerHTML = '<div style="position:absolute;inset:0;background:#5C94FC;opacity:0;transition:opacity 0.3s ease;"></div>';
+            setTimeout(() => { overlay.firstElementChild.style.opacity = '1'; }, 10);
 
-            if (fromNum === 1 && toNum === 2) {
-                overlay.innerHTML = `
-                    <div style="position:absolute;inset:0;background:rgba(0,0,0,0);overflow:hidden;pointer-events:none;">
-                        <img src="https://media.tenor.com/2RoR1_D7N3sAAAAi/mario-running.gif"
-                            style="position:absolute;bottom:24px;left:-120px;width:80px;animation:marioRealRun 1.8s linear forwards;">
-                    </div>`;
-                const s = document.createElement('style');
-                s.id = 'marioRunCSS';
-                s.textContent = `@keyframes marioRealRun { 0% { left: -120px; } 100% { left: 110vw; } }`;
-                document.head.appendChild(s);
+            setTimeout(() => {
+                current.classList.remove('active');
+                next.classList.add('active');
+                currentScene = toNum;
+                triggerSceneLogic(toNum);
+            }, 300);
 
-                setTimeout(() => switchSceneDOM(current, next, toNum), 900);
-                setTimeout(() => {
-                    overlay.innerHTML = '';
-                    const old = document.getElementById('marioRunCSS');
-                    if (old) old.remove();
-                    isAnimating = false;
-                }, 1900);
+            setTimeout(() => {
+                overlay.firstElementChild.style.opacity = '0';
+            }, 400);
 
-            } else if (fromNum === 2 && toNum === 3) {
-                overlay.innerHTML = `
-                    <div style="position:relative;display:flex;align-items:center;justify-content:center;">
-                        <div style="position:absolute;width:50px;height:50px;border-radius:50%;
-                            background:#E52521;transform:translate(-50%,-50%) scale(0);
-                            top:50%;left:50%;animation:circleGrow 1.6s ease-in-out forwards;z-index:0;"></div>
-                        <div style="font-size:70px;animation:mushroomGrowAnim 1.6s ease-in-out forwards;position:relative;z-index:1;">🍄</div>
-                    </div>`;
-                setTimeout(() => switchSceneDOM(current, next, toNum), 800);
-                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1600);
-
-            } else if (fromNum === 3 && toNum === 4) {
-                const s = document.createElement('style');
-                s.textContent = `
-                    @keyframes coinSpin{0%{transform:scale(0) rotateY(0deg);opacity:1}40%{transform:scale(5) rotateY(360deg);opacity:1}60%{transform:scale(5) rotateY(360deg);opacity:1}100%{transform:scale(0) rotateY(720deg);opacity:0}}
-                    @keyframes coinPart{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}`;
-                document.head.appendChild(s);
-                let pHTML = '';
-                for (let i = 0; i < 10; i++) {
-                    const angle = (i / 10) * 360;
-                    const dist = 90 + Math.random() * 50;
-                    const tx = Math.round(Math.cos(angle * Math.PI / 180) * dist);
-                    const ty = Math.round(Math.sin(angle * Math.PI / 180) * dist);
-                    const em = ['🪙','⭐','✨','💛','🌟'][i % 5];
-                    pHTML += `<div style="position:absolute;font-size:18px;--tx:${tx}px;--ty:${ty}px;animation:coinPart 0.8s ease-out 0.4s forwards;">${em}</div>`;
-                }
-                overlay.innerHTML = `
-                    <div style="position:relative;display:flex;align-items:center;justify-content:center;width:200px;height:200px;">
-                        ${pHTML}
-                        <div style="font-size:72px;animation:coinSpin 1.6s ease-in-out forwards;position:relative;z-index:1;">🪙</div>
-                    </div>`;
-                setTimeout(() => switchSceneDOM(current, next, toNum), 800);
-                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1700);
-
-            } else if (fromNum === 4 && toNum === 5) {
-                const s = document.createElement('style');
-                s.textContent = `
-                    @keyframes starSpin{0%{transform:scale(0) rotate(0deg);opacity:1}35%{transform:scale(5) rotate(180deg);opacity:1}60%{transform:scale(5) rotate(360deg);opacity:1}100%{transform:scale(0) rotate(540deg);opacity:0}}
-                    @keyframes ringOut{0%{transform:translate(-50%,-50%) scale(0);opacity:.9}100%{transform:translate(-50%,-50%) scale(9);opacity:0}}`;
-                document.head.appendChild(s);
-                overlay.innerHTML = `
-                    <div style="position:relative;width:200px;height:200px;display:flex;align-items:center;justify-content:center;">
-                        <div style="position:absolute;top:50%;left:50%;width:60px;height:60px;border-radius:50%;border:6px solid #FBD000;animation:ringOut 1s ease-out 0s forwards;"></div>
-                        <div style="position:absolute;top:50%;left:50%;width:60px;height:60px;border-radius:50%;border:6px solid #FBD000;animation:ringOut 1s ease-out 0.2s forwards;"></div>
-                        <div style="position:absolute;top:50%;left:50%;width:60px;height:60px;border-radius:50%;border:6px solid #FBD000;animation:ringOut 1s ease-out 0.4s forwards;"></div>
-                        <div style="font-size:80px;position:relative;z-index:2;animation:starSpin 1.6s ease-in-out forwards;">⭐</div>
-                    </div>`;
-                setTimeout(() => switchSceneDOM(current, next, toNum), 850);
-                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1700);
-
-            } else if (fromNum === 5 && toNum === 6) {
-                const s = document.createElement('style');
-                s.textContent = `
-                    @keyframes chompT{0%{transform:translateY(-110%)}35%{transform:translateY(0)}65%{transform:translateY(0)}100%{transform:translateY(-110%)}}
-                    @keyframes chompB{0%{transform:translateY(110%)}35%{transform:translateY(0)}65%{transform:translateY(0)}100%{transform:translateY(110%)}}`;
-                document.head.appendChild(s);
-                overlay.innerHTML = `
-                    <div style="position:absolute;inset:0;overflow:hidden;">
-                        <div style="position:absolute;top:0;left:0;right:0;height:50%;background:#229024;border-bottom:8px solid #145214;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;font-size:56px;animation:chompT 1.6s ease-in-out forwards;">🌿</div>
-                        <div style="position:absolute;bottom:0;left:0;right:0;height:50%;background:#229024;border-top:8px solid #145214;display:flex;align-items:flex-start;justify-content:center;padding-top:8px;font-size:56px;animation:chompB 1.6s ease-in-out forwards;">🌿</div>
-                    </div>`;
-                setTimeout(() => switchSceneDOM(current, next, toNum), 800);
-                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1700);
-
-            } else if (fromNum === 6 && toNum === 7) {
-                const s = document.createElement('style');
-                s.textContent = `
-                    @keyframes flagSlide{0%{transform:translateY(-100vh);opacity:1}40%{transform:translateY(0);opacity:1}70%{transform:translateY(0);opacity:1}100%{transform:translateY(100vh);opacity:0}}
-                    @keyframes fwPop{0%{transform:translate(var(--fx),var(--fy)) scale(0);opacity:1}50%{transform:translate(var(--fx),var(--fy)) scale(1.2);opacity:1}100%{transform:translate(var(--fx),var(--fy)) scale(0);opacity:0}}`;
-                document.head.appendChild(s);
-                let fw = '';
-                ['🎆','✨','⭐','🎇','💥','🌟','🎉'].forEach((e, i) => {
-                    const x = (Math.random() * 220) - 110;
-                    const y = (Math.random() * 200) - 150;
-                    const d = 0.3 + Math.random() * 0.5;
-                    fw += `<div style="position:absolute;font-size:22px;--fx:${x}px;--fy:${y}px;animation:fwPop 0.9s ease-out ${d}s forwards;">${e}</div>`;
-                });
-                overlay.innerHTML = `
-                    <div style="position:absolute;inset:0;background:#5C94FC;animation:flagSlide 2s ease-in-out forwards;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;overflow:hidden;">
-                        <div style="position:relative;">${fw}</div>
-                        <div style="font-size:64px;">🏁</div>
-                        <div style="font-family:'Press Start 2P',cursive;font-size:clamp(0.65rem,3vw,1rem);color:#FBD000;text-shadow:3px 3px 0 #000;text-align:center;line-height:1.7;">COURSE<br>CLEAR!</div>
-                    </div>`;
-                setTimeout(() => switchSceneDOM(current, next, toNum), 1000);
-                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 2100);
-
-            } else {
-                overlay.innerHTML = '<div class="pipe-wipe"></div>';
-                setTimeout(() => switchSceneDOM(current, next, toNum), 700);
-                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1400);
-            }
+            setTimeout(() => {
+                overlay.innerHTML = '';
+                isAnimating = false;
+            }, 700);
         }
 
         function switchSceneDOM(current, next, num) {
@@ -659,7 +565,7 @@
                 document.getElementById('btn-s1').style.display = "inline-flex";
             } else {
                 displayObj.classList.add('shake');
-                msgObj.innerHTML = "INCORRECT!💀<br><span style='font-size:0.85rem; color:var(--white); font-weight:normal;'>Oopss... tanggal lahir kamu (DDMM)</span>";
+                msgObj.innerHTML = "INCORRECT!💀<br><span style='font-size:0.75rem; color:var(--white); font-weight:normal;'>Oopss... tanggal lahir kamu (DDMM)</span>";
                 msgObj.style.opacity = 1;
                 msgObj.style.color = "#000";
                 setTimeout(function() {
@@ -708,7 +614,7 @@
                     let el = elements[index];
                     if (el.type === 'char') container.innerHTML += el.val; else if (el.type === 'br') container.innerHTML += '<br>';
                     container.parentElement.scrollTop = container.parentElement.scrollHeight;
-                    index++; setTimeout(typeNext, 50);
+                    index++; setTimeout(typeNext, 40);
                 } else {
                     container.classList.remove('typing-cursor');
                     document.getElementById('btn-s4').style.opacity = 1;
