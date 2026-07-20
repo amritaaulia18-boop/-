@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>𝓞𝓷𝓮 𝓜𝓸𝓻𝓮 𝓛𝓮𝓿𝓮𝓵, 𝓜𝔂 𝓛𝓸𝓿𝓮 💌💖</title>
+    <title>𝓞𝓷𝓮 𝓜𝓸𝓻𝓮 𝓛𝓮𝓿𝓮𝓵, 𝓜𝔂 𝓛𝓸𝓿𝓮💌💖</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,15 +75,15 @@
             z-index: 4;
         }
 
-        /* --- DEKORASI 5 BATA & BOX TANDA TANYA DENGAN POSISI SPESIFIK --- */
+        /* --- DEKORASI BATA & BOX TANDA TANYA --- */
         .decor-bricks-group {
             position: fixed;
-            left: 15px;
+            left: 20px;
             bottom: 120px;
             z-index: 4;
             pointer-events: none;
-            width: 190px;
-            height: 80px;
+            width: 160px;
+            height: 64px;
         }
         .retro-brick {
             position: absolute;
@@ -107,13 +107,13 @@
             color: #8B4513;
             box-shadow: inset -3px -3px 0px #c5a600;
         }
-        /* Susunan 5 item: Bata, Box ?, Bata, Box ?, Bata + Box ? diatas bata ke-2 */
+        /* Susunan: Bata, ?, Bata, ?, Bata (Bawah) + ? (Atas bata ke-2) */
         .rb-1 { left: 0px; bottom: 0px; }
         .rq-1 { left: 32px; bottom: 0px; }
         .rb-2 { left: 64px; bottom: 0px; }
         .rq-2 { left: 96px; bottom: 0px; }
         .rb-3 { left: 128px; bottom: 0px; }
-        .rq-top { left: 64px; bottom: 32px; } /* Diatas bata ke-2 */
+        .rq-top { left: 64px; bottom: 32px; }
 
         .floating-item {
             position: absolute; 
@@ -172,39 +172,39 @@
             display: flex; flex-direction: column;
         }
         
-        /* KONDIMEN DINAIKAN SEDIKIT KE ATAS & DITENGAHKAN */
+        /* POSISI KONTEN DINAIKAN KE ATAS DENGAN PADDING-TOP */
         .scene {
             display: none; flex-direction: column; align-items: center; justify-content: flex-start;
-            width: 100%; height: 100%; padding: 15px 20px 20px 20px;
+            width: 100%; height: 100%; padding: 6vh 20px 80px 20px;
             position: absolute; top: 0; left: 0;
             overflow-y: auto; overflow-x: hidden;
             background: transparent;
         }
         .scene.active { display: flex; z-index: 10; }
 
-        h1, h2, h3 { font-family: var(--font-retro); color: var(--white); text-align: center; margin-top: 5px; margin-bottom: 8px; text-shadow: 2px 2px 0px #000; line-height: 1.3; }
-        h1 { font-size: 1.1rem; }
+        h1, h2, h3 { font-family: var(--font-retro); color: var(--white); text-align: center; margin-bottom: 8px; text-shadow: 2px 2px 0px #000; line-height: 1.3; }
+        h1 { font-size: 1.15rem; }
         h2 { font-size: 0.95rem; }
         p { text-align: center; font-size: 0.9rem; margin-bottom: 6px; font-weight: 800; color: var(--white); text-shadow: 2px 2px 0px #000; }
 
         .btn {
-            background-color: var(--mario-red); color: var(--white); border: 3px solid #000; padding: 9px 16px;
-            font-family: var(--font-retro); font-size: 0.65rem; cursor: pointer; box-shadow: inset -3px -3px 0px rgba(0,0,0,0.3);
+            background-color: var(--mario-red); color: var(--white); border: 3px solid #000; padding: 10px 18px;
+            font-family: var(--font-retro); font-size: 0.7rem; cursor: pointer; box-shadow: inset -3px -3px 0px rgba(0,0,0,0.3);
             text-transform: uppercase; transition: transform 0.1s; display: inline-flex; align-items: center; justify-content: center;
-            margin-top: 8px; text-shadow: 1px 1px 0px #000;
+            margin-top: 10px; text-shadow: 1px 1px 0px #000;
         }
         .btn:active { transform: scale(0.95); box-shadow: inset 3px 3px 0px rgba(0,0,0,0.3); }
 
         .password-display { display: flex; gap: 6px; margin: 4px 0 8px; justify-content: center; }
         .pwd-box {
-            width: 36px; height: 36px; background: var(--mario-yellow); border: 3px solid #000;
-            display: flex; align-items: center; justify-content: center; font-family: var(--font-retro); font-size: 14px; color: #000;
+            width: 38px; height: 38px; background: var(--mario-yellow); border: 3px solid #000;
+            display: flex; align-items: center; justify-content: center; font-family: var(--font-retro); font-size: 15px; color: #000;
             box-shadow: inset -3px -3px 0px #c5a600;
         }
-        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; width: 80%; max-width: 190px; margin: 0 auto; }
+        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: 80%; max-width: 200px; margin: 0 auto; }
         .key {
-            width: 39px; height: 39px; background: var(--mario-brown); border: 3px solid #000;
-            display: flex; align-items: center; justify-content: center; font-family: var(--font-retro); font-size: 0.85rem; color: var(--white);
+            width: 42px; height: 42px; background: var(--mario-brown); border: 3px solid #000;
+            display: flex; align-items: center; justify-content: center; font-family: var(--font-retro); font-size: 0.9rem; color: var(--white);
             cursor: pointer; margin: 0 auto; box-shadow: inset -3px -3px 0px #5c2c09; text-shadow: 2px 2px 0px #000;
         }
         .key:active { transform: scale(0.9); box-shadow: inset 3px 3px 0px #5c2c09; }
@@ -238,7 +238,7 @@
         .secret-paper.show { display: block; animation: popUp 0.3s forwards; }
         @keyframes popUp { 0% { transform: scale(0.5); } 100% { transform: scale(1); } }
 
-        .letter-container { background: #fff; width: 90%; max-width: 310px; height: 35vh; border: 5px solid #000; padding: 10px; box-shadow: 6px 6px 0px rgba(0,0,0,0.5); overflow-y: auto; margin: 0 auto; }
+        .letter-container { background: #fff; width: 90%; max-width: 310px; height: 32vh; border: 5px solid #000; padding: 10px; box-shadow: 6px 6px 0px rgba(0,0,0,0.5); overflow-y: auto; margin: 0 auto; }
         .typewriter-text { font-family: var(--font-retro); font-size: 0.6rem; line-height: 1.5; color: #000; text-shadow: none; min-height: 100%; text-align: left; }
         .typing-cursor::after { content: '█'; animation: blink 1s step-end infinite; }
 
@@ -266,7 +266,7 @@
         }
         .cw-input:focus { background: var(--mario-yellow); box-shadow: inset 0 0 0 2px var(--mario-red); z-index: 5; position: relative;}
         .cw-input.correct { background: var(--mario-green); color: #fff; }
-        .cw-num { position: absolute; top: 1px; left: 1px; font-size: 6.5px; font-family: var(--font-body); font-weight: bold; color: #000; z-index: 2; pointer-events: none;}
+        .cw-num { position: absolute; top: 1px; left: 1px; font-size: 6px; font-family: var(--font-body); font-weight: bold; color: #000; z-index: 2; pointer-events: none;}
         .cw-clues { width: 90%; max-width: 290px; background: #fff; padding: 8px; border: 4px solid #000; font-family: var(--font-body); font-size: 0.7rem; color: #000; box-shadow: 5px 5px 0px rgba(0,0,0,0.5); margin: 0 auto;}
         .cw-clues h4 { color: var(--mario-red); margin-bottom: 2px; font-family: var(--font-retro); font-size: 0.5rem; text-shadow: none;}
         .cw-clues ul { list-style: none; padding-left: 0; margin-bottom: 4px; text-align: left;}
@@ -289,13 +289,14 @@
     <div class="mario-pipe-top"></div>
     <div class="mario-pipe"></div>
     
-    <!-- 5 DEKORASI BATA & BOX TANDA TANYA SPESIFIK -->
+    <!-- DEKORASI 5 SUSUN BATA & BOX -->
     <div class="decor-bricks-group">
         <div class="retro-brick rb-1"></div>
         <div class="retro-question-block rq-1">?</div>
         <div class="retro-brick rb-2"></div>
         <div class="retro-question-block rq-2">?</div>
         <div class="retro-brick rb-3"></div>
+        <!-- Di Atas Bata ke-2 -->
         <div class="retro-question-block rq-top">?</div>
     </div>
 
@@ -536,7 +537,7 @@
             const overlay = document.getElementById('transition-overlay');
             overlay.style.zIndex = "9999";
 
-            // 1. TRANSISI SCENE 1 KE 2: Tirai Tertutup Warna Merah
+            /* TRANSISI 1 -> 2: TIRAI TERTUTUP MERAH */
             if (fromNum === 1 && toNum === 2) {
                 const s = document.createElement('style');
                 s.id = 'curtainCSS';
@@ -558,37 +559,39 @@
                     isAnimating = false;
                 }, 1600);
 
-            // 2. TRANSISI SCENE 2 KE 3: Hujan Emotikon Jamur Penuh Menutupi Layar
+            /* TRANSISI 2 -> 3: HUJAN JAMUR MENUTUPI LAYAR */
             } else if (fromNum === 2 && toNum === 3) {
                 const s = document.createElement('style');
                 s.id = 'shroomRainCSS';
                 s.textContent = `
+                    @keyframes rainFadeIn { 0% { background: rgba(92,148,252,0); } 30%, 70% { background: rgba(92,148,252,1); } 100% { background: rgba(92,148,252,0); } }
                     @keyframes rainFall { 0% { transform: translateY(-10vh); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(110vh); opacity: 1; } }
                 `;
                 document.head.appendChild(s);
                 let rainHTML = '';
-                for(let i=0; i<35; i++) {
+                for(let i=0; i<45; i++) {
                     const leftPos = Math.random() * 100;
-                    const animDur = 0.6 + Math.random() * 0.6;
+                    const animDur = 0.5 + Math.random() * 0.5;
                     const animDelay = Math.random() * 0.4;
-                    const sz = 24 + Math.random() * 16;
+                    const sz = 24 + Math.random() * 24;
                     rainHTML += `<div style="position:absolute;left:${leftPos}vw;top:-10vh;font-size:${sz}px;animation:rainFall ${animDur}s linear ${animDelay}s forwards;">🍄</div>`;
                 }
-                overlay.innerHTML = `<div style="position:absolute;inset:0;background:rgba(92,148,252,0.85);overflow:hidden;pointer-events:none;">${rainHTML}</div>`;
-                setTimeout(() => switchSceneDOM(current, next, toNum), 700);
+                overlay.innerHTML = `<div style="position:absolute;inset:0;animation:rainFadeIn 1.6s ease-in-out forwards;overflow:hidden;pointer-events:none;z-index:9999;">${rainHTML}</div>`;
+                setTimeout(() => switchSceneDOM(current, next, toNum), 800);
                 setTimeout(() => {
                     overlay.innerHTML = '';
                     const old = document.getElementById('shroomRainCSS');
                     if (old) old.remove();
                     isAnimating = false;
-                }, 1400);
+                }, 1600);
 
-            // 3. TRANSISI SCENE 3 KE 4: Coin Spin Burst (Koin Berputar Meledak Jadi Partikel)
+            /* TRANSISI 3 -> 4: KOIN BURST */
             } else if (fromNum === 3 && toNum === 4) {
                 const s = document.createElement('style');
                 s.textContent = `
-                    @keyframes coinSpinBurst { 0% { transform: scale(0) rotateY(0deg); opacity: 1; } 40% { transform: scale(4) rotateY(360deg); opacity: 1; } 70% { transform: scale(4) rotateY(720deg); opacity: 1; } 100% { transform: scale(0) rotateY(1080deg); opacity: 0; } }
+                    @keyframes coinSpinBurst { 0% { transform: scale(0) rotateY(0deg); opacity: 1; } 40% { transform: scale(4.5) rotateY(360deg); opacity: 1; } 70% { transform: scale(4.5) rotateY(720deg); opacity: 1; } 100% { transform: scale(0) rotateY(1080deg); opacity: 0; } }
                     @keyframes partFly { 0% { transform: translate(0,0) scale(1); opacity: 1; } 100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; } }
+                    @keyframes bgFade { 0% { background: rgba(92,148,252,0); } 30%, 70% { background: rgba(92,148,252,1); } 100% { background: rgba(92,148,252,0); } }
                 `;
                 document.head.appendChild(s);
                 let pHTML = '';
@@ -597,37 +600,39 @@
                     const dist = 100 + Math.random() * 80;
                     const tx = Math.round(Math.cos(angle * Math.PI / 180) * dist);
                     const ty = Math.round(Math.sin(angle * Math.PI / 180) * dist);
-                    pHTML += `<div style="position:absolute;font-size:20px;--tx:${tx}px;--ty:${ty}px;animation:partFly 0.9s ease-out 0.3s forwards;">🪙</div>`;
+                    pHTML += `<div style="position:absolute;font-size:24px;--tx:${tx}px;--ty:${ty}px;animation:partFly 0.8s ease-out 0.4s forwards;">✨</div>`;
                 }
                 overlay.innerHTML = `
-                    <div style="position:relative;display:flex;align-items:center;justify-content:center;width:100%;height:100%;">
+                    <div style="position:relative;display:flex;align-items:center;justify-content:center;width:100%;height:100%;animation:bgFade 1.6s ease-in-out forwards;">
                         ${pHTML}
-                        <div style="font-size:75px;animation:coinSpinBurst 1.5s ease-in-out forwards;position:relative;z-index:1;">🪙</div>
+                        <div style="font-size:75px;animation:coinSpinBurst 1.6s ease-in-out forwards;position:relative;z-index:1;">🪙</div>
                     </div>`;
-                setTimeout(() => switchSceneDOM(current, next, toNum), 750);
-                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1500);
+                setTimeout(() => switchSceneDOM(current, next, toNum), 800);
+                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1600);
 
-            // 4. TRANSISI SCENE 4 KE 5: Star Warp Power✩ (Bintang dengan Cincin Meluap + Sparkle)
+            /* TRANSISI 4 -> 5: STAR WARP */
             } else if (fromNum === 4 && toNum === 5) {
                 const s = document.createElement('style');
                 s.textContent = `
-                    @keyframes starWarpSpin { 0% { transform: scale(0) rotate(0deg); opacity: 1; } 40% { transform: scale(4.5) rotate(180deg); opacity: 1; } 70% { transform: scale(4.5) rotate(360deg); opacity: 1; } 100% { transform: scale(0) rotate(540deg); opacity: 0; } }
-                    @keyframes ringExpand { 0% { transform: translate(-50%,-50%) scale(0); opacity: 1; border-color: #FBD000; } 100% { transform: translate(-50%,-50%) scale(8); opacity: 0; border-color: #FFF; } }
+                    @keyframes starWarpSpin { 0% { transform: scale(0) rotate(0deg); opacity: 1; } 40% { transform: scale(5) rotate(180deg); opacity: 1; } 70% { transform: scale(5) rotate(360deg); opacity: 1; } 100% { transform: scale(0) rotate(540deg); opacity: 0; } }
+                    @keyframes ringExpand { 0% { transform: translate(-50%,-50%) scale(0); opacity: 1; border-color: #FBD000; } 100% { transform: translate(-50%,-50%) scale(9); opacity: 0; border-color: #FFF; } }
+                    @keyframes bgFadeStar { 0% { background: rgba(92,148,252,0); } 30%, 70% { background: rgba(92,148,252,1); } 100% { background: rgba(92,148,252,0); } }
                 `;
                 document.head.appendChild(s);
                 overlay.innerHTML = `
-                    <div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+                    <div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;animation:bgFadeStar 1.6s ease-in-out forwards;">
                         <div style="position:absolute;top:50%;left:50%;width:70px;height:70px;border-radius:50%;border:8px solid #FBD000;animation:ringExpand 1s ease-out 0s forwards;"></div>
                         <div style="position:absolute;top:50%;left:50%;width:70px;height:70px;border-radius:50%;border:8px solid #FBD000;animation:ringExpand 1s ease-out 0.25s forwards;"></div>
                         <div style="position:absolute;top:50%;left:50%;width:70px;height:70px;border-radius:50%;border:8px solid #FBD000;animation:ringExpand 1s ease-out 0.5s forwards;"></div>
-                        <div style="font-size:85px;position:relative;z-index:2;animation:starWarpSpin 1.5s ease-in-out forwards;">⭐</div>
+                        <div style="font-size:85px;position:relative;z-index:2;animation:starWarpSpin 1.6s ease-in-out forwards;">⭐</div>
                     </div>`;
-                setTimeout(() => switchSceneDOM(current, next, toNum), 750);
-                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1500);
+                setTimeout(() => switchSceneDOM(current, next, toNum), 800);
+                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1600);
 
-            // 5. TRANSISI SCENE 5 KE 6: Pipa Ala Mario Bros Muncul dari Bawah ke Atas Menutupi Seluruh Layar
+            /* TRANSISI 5 -> 6: PIPA MARIO MUNCUL DARI BAWAH */
             } else if (fromNum === 5 && toNum === 6) {
                 const s = document.createElement('style');
+                s.id = 'pipeCSS';
                 s.textContent = `
                     @keyframes pipeRiseCover { 0% { transform: translateY(100%); } 45%, 65% { transform: translateY(0); } 100% { transform: translateY(-100%); } }
                 `;
@@ -644,7 +649,6 @@
                     isAnimating = false;
                 }, 1800);
 
-            // 6. TRANSISI SCENE 6 KE 7 (ENDING / WIN)
             } else if (fromNum === 6 && toNum === 7) {
                 const s = document.createElement('style');
                 s.textContent = `
@@ -669,9 +673,9 @@
                 setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 2100);
 
             } else {
-                overlay.innerHTML = '<div style="position:absolute;inset:0;background:#5C94FC;"></div>';
-                setTimeout(() => switchSceneDOM(current, next, toNum), 500);
-                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1000);
+                overlay.innerHTML = '<div class="pipe-wipe"></div>';
+                setTimeout(() => switchSceneDOM(current, next, toNum), 700);
+                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1400);
             }
         }
 
@@ -727,7 +731,7 @@
                 document.getElementById('btn-s1').style.display = "inline-flex";
             } else {
                 displayObj.classList.add('shake');
-                msgObj.innerHTML = "INCORRECT!💀<br><span style='font-size:0.75rem; color:var(--white); font-weight:normal;'>Oopss... tanggal lahir kamu (DDMM)</span>";
+                msgObj.innerHTML = "INCORRECT!💀<br><span style='font-size:0.8rem; color:var(--white); font-weight:normal;'>Oopss... tanggal lahir kamu (DDMM)</span>";
                 msgObj.style.opacity = 1;
                 msgObj.style.color = "#000";
                 setTimeout(function() {
