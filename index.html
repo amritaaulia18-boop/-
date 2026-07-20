@@ -75,7 +75,7 @@
             z-index: 4;
         }
 
-        /* --- DEKORASI BATA & BOX TANDA TANYA DENGAN JARAK --- */
+        /* --- DEKORASI BATA & BOX TANDA TANYA --- */
         .decor-bricks-group {
             position: fixed;
             left: 20px;
@@ -83,7 +83,7 @@
             z-index: 4;
             pointer-events: none;
             width: 160px;
-            height: 96px; /* Diperbesar untuk menampung jarak kosong */
+            height: 96px;
         }
         .retro-brick {
             position: absolute;
@@ -107,13 +107,11 @@
             color: #8B4513;
             box-shadow: inset -3px -3px 0px #c5a600;
         }
-        /* Susunan bawah */
         .rb-1 { left: 0px; bottom: 0px; }
         .rq-1 { left: 32px; bottom: 0px; }
         .rb-2 { left: 64px; bottom: 0px; }
         .rq-2 { left: 96px; bottom: 0px; }
         .rb-3 { left: 128px; bottom: 0px; }
-        /* Box tanda tanya di atas bata ke-2, diberi jarak 32px (1 balok) */
         .rq-top { left: 64px; bottom: 64px; }
 
         .floating-item {
@@ -148,10 +146,11 @@
             100% { transform: translateX(120vw); opacity: 0; }
         }
 
+        /* --- MARIO GIF PAS DI ATAS TANAH (BOTTOM 50px) --- */
         .mario-corner-container {
             position: fixed;
             left: 15px;
-            bottom: 39px;
+            bottom: 50px;
             z-index: 20;
             pointer-events: none;
         }
@@ -173,7 +172,6 @@
             display: flex; flex-direction: column;
         }
         
-        /* POSISI KONTEN TENGAH TAPI NAIK SEDIKIT (padding-bottom 10vh) */
         .scene {
             display: none; flex-direction: column; align-items: center; justify-content: center;
             width: 100%; height: 100%; padding: 20px 20px 10vh 20px;
@@ -290,14 +288,13 @@
     <div class="mario-pipe-top"></div>
     <div class="mario-pipe"></div>
     
-    <!-- DEKORASI 5 SUSUN BATA & BOX (BOX ATAS DENGAN JARAK KOSONG) -->
+    <!-- DEKORASI 5 SUSUN BATA & BOX -->
     <div class="decor-bricks-group">
         <div class="retro-brick rb-1"></div>
         <div class="retro-question-block rq-1">?</div>
         <div class="retro-brick rb-2"></div>
         <div class="retro-question-block rq-2">?</div>
         <div class="retro-brick rb-3"></div>
-        <!-- Di Atas Bata ke-2, diberi jarak 32px -->
         <div class="retro-question-block rq-top">?</div>
     </div>
 
@@ -538,7 +535,6 @@
             const overlay = document.getElementById('transition-overlay');
             overlay.style.zIndex = "9999";
 
-            /* TRANSISI 1 -> 2: TIRAI TERTUTUP MERAH */
             if (fromNum === 1 && toNum === 2) {
                 const s = document.createElement('style');
                 s.id = 'curtainCSS';
@@ -560,7 +556,6 @@
                     isAnimating = false;
                 }, 1600);
 
-            /* TRANSISI 2 -> 3: HUJAN JAMUR MENUTUPI LAYAR */
             } else if (fromNum === 2 && toNum === 3) {
                 const s = document.createElement('style');
                 s.id = 'shroomRainCSS';
@@ -586,7 +581,6 @@
                     isAnimating = false;
                 }, 1600);
 
-            /* TRANSISI 3 -> 4: KOIN BURST */
             } else if (fromNum === 3 && toNum === 4) {
                 const s = document.createElement('style');
                 s.textContent = `
@@ -611,7 +605,6 @@
                 setTimeout(() => switchSceneDOM(current, next, toNum), 800);
                 setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1600);
 
-            /* TRANSISI 4 -> 5: STAR WARP */
             } else if (fromNum === 4 && toNum === 5) {
                 const s = document.createElement('style');
                 s.textContent = `
@@ -630,7 +623,6 @@
                 setTimeout(() => switchSceneDOM(current, next, toNum), 800);
                 setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1600);
 
-            /* TRANSISI 5 -> 6: PIPA MARIO MUNCUL DARI BAWAH */
             } else if (fromNum === 5 && toNum === 6) {
                 const s = document.createElement('style');
                 s.id = 'pipeCSS';
@@ -732,7 +724,7 @@
                 document.getElementById('btn-s1').style.display = "inline-flex";
             } else {
                 displayObj.classList.add('shake');
-                msgObj.innerHTML = "INCORRECT!💀<br><span style='font-size:0.75rem; color:var(--white); font-weight:normal;'>Oopss... tanggal lahir kamu (DDMM)</span>";
+                msgObj.innerHTML = "INCORRECT!💀<br><span style='font-size:0.8rem; color:var(--white); font-weight:normal;'>Oopss... tanggal lahir kamu (DDMM)</span>";
                 msgObj.style.opacity = 1;
                 msgObj.style.color = "#000";
                 setTimeout(function() {
@@ -821,48 +813,39 @@
             for (let r = 0; r <= cwMaxRow; r++) {
                 for (let c = 0; c <= cwMaxCol; c++) {
                     let key = `${r}-${c}`; let cellDiv = document.createElement('div'); cellDiv.className = 'cw-cell';
-                                        if (cwGrid[key]) {
-                        let input = document.createElement('input');
-                        input.maxLength = 1;
-                        input.dataset.r = r;
-                        input.dataset.c = c;
-                        input.dataset.key = key;
-
-                        // 1. ATUR ARAH OTOMATIS
-                        input.addEventListener('focus', e => {
-                            let cd = cwGrid[e.target.dataset.key];
+                    if (cwGrid[key]) {
+                        let input = document.createElement('input'); input.type = 'text'; input.className = 'cw-input';
+                        input.maxLength = 1; input.dataset.r = r; input.dataset.c = c; input.dataset.key = key;
+                        
+                        /* --- DIPERBAIKI: PRIORITASKAN ARAH 'ACROSS' JIKA KOTAK PUNYA PILIHAN GANDA --- */
+                        input.addEventListener('focus', e => { 
+                            let cd = cwGrid[e.target.dataset.key]; 
+                            let hasAcross = cd.clues.some(c => c.dir === 'across');
                             let isCurrentDirValid = cd.clues.some(c => c.dir === activeDirection);
+                            
                             if (!isCurrentDirValid) {
-                                activeDirection = cd.clues[0].dir;
+                                activeDirection = hasAcross ? 'across' : cd.clues[0].dir;
+                                document.getElementById('cw-dir-badge').innerText = `MODE: ${activeDirection.toUpperCase()} ${activeDirection==='across'?'➔':'⬇'}`; 
                             }
-                            document.getElementById('cw-dir-badge').textContent = activeDirection.toUpperCase();
                         });
-
-                        // 2. KEMBALIKAN FUNGSI NGETIK & HAPUS (Ini yang tadi hilang!)
+                        
                         input.addEventListener('input', handleCellInput);
                         input.addEventListener('keydown', handleCellKeydown);
-
-                        // 3. FUNGSI KLIK (Bisa ganti arah Mendatar/Menurun di kotak persimpangan)
+                        
                         input.addEventListener('click', e => {
                             let cd = cwGrid[e.target.dataset.key];
-                            if (cd.clues.length > 1) {
+                            if (cd.clues.length > 1 && document.activeElement === e.target) {
                                 activeDirection = activeDirection === 'across' ? 'down' : 'across';
-                                document.getElementById('cw-dir-badge').textContent = activeDirection.toUpperCase();
+                                document.getElementById('cw-dir-badge').innerText = `MODE: ${activeDirection.toUpperCase()} ${activeDirection==='across'?'➔':'⬇'}`;
                             }
                         });
-
+                        
                         cellDiv.appendChild(input);
-
-                        // 4. MUNCULIN ANGKA TTS
                         if (cwGrid[key].num) {
-                            let numSpan = document.createElement('span');
-                            numSpan.className = 'cw-num';
-                            numSpan.textContent = cwGrid[key].num;
-                            cellDiv.appendChild(numSpan);
+                            let numSpan = document.createElement('span'); numSpan.className = 'cw-num'; numSpan.innerText = cwGrid[key].num; cellDiv.appendChild(numSpan);
                         }
                     }
                     board.appendChild(cellDiv);
-
                 }
             }
         }
@@ -895,7 +878,7 @@
         }
         function validateBoard() {
             let allCorrect = true; let inputs = document.querySelectorAll('.cw-input');
-            inputs.forEach(inp => {
+        inputs.forEach(inp => {
                 let key = inp.dataset.key;
                 if (inp.value.toUpperCase() === cwGrid[key].answer) inp.classList.add('correct');
                 else { inp.classList.remove('correct'); allCorrect = false; }
