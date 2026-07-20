@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>A Special Surprise ♡</title>
+    <title>𝓞𝓷𝓮 𝓜𝓸𝓻𝓮 𝓛𝓮𝓿𝓮𝓵, 𝓜𝔂 𝓛𝓸𝓿𝓮 💌💖</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,36 +75,45 @@
             z-index: 4;
         }
 
-        /* --- DEKORASI BATA & BALOK DI KIRI/KANAN --- */
-        .decor-bricks {
+        /* --- DEKORASI 5 BATA & BOX TANDA TANYA DENGAN POSISI SPESIFIK --- */
+        .decor-bricks-group {
             position: fixed;
-            left: 20px;
+            left: 15px;
             bottom: 120px;
-            display: flex;
-            gap: 4px;
             z-index: 4;
             pointer-events: none;
+            width: 190px;
+            height: 80px;
         }
         .retro-brick {
-            width: 35px;
-            height: 35px;
+            position: absolute;
+            width: 32px;
+            height: 32px;
             background: #B22222;
             border: 3px solid #000;
             box-shadow: inset -3px -3px 0px #701111;
         }
         .retro-question-block {
-            width: 35px;
-            height: 35px;
+            position: absolute;
+            width: 32px;
+            height: 32px;
             background: var(--mario-yellow);
             border: 3px solid #000;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: var(--font-retro);
-            font-size: 16px;
+            font-size: 15px;
             color: #8B4513;
             box-shadow: inset -3px -3px 0px #c5a600;
         }
+        /* Susunan 5 item: Bata, Box ?, Bata, Box ?, Bata + Box ? diatas bata ke-2 */
+        .rb-1 { left: 0px; bottom: 0px; }
+        .rq-1 { left: 32px; bottom: 0px; }
+        .rb-2 { left: 64px; bottom: 0px; }
+        .rq-2 { left: 96px; bottom: 0px; }
+        .rb-3 { left: 128px; bottom: 0px; }
+        .rq-top { left: 64px; bottom: 32px; } /* Diatas bata ke-2 */
 
         .floating-item {
             position: absolute; 
@@ -163,39 +172,39 @@
             display: flex; flex-direction: column;
         }
         
-        /* SEMUA KONDIMEN DI-CENTERING SEMPURNA */
+        /* KONDIMEN DINAIKAN SEDIKIT KE ATAS & DITENGAHKAN */
         .scene {
-            display: none; flex-direction: column; align-items: center; justify-content: center;
-            width: 100%; height: 100%; padding: 20px;
+            display: none; flex-direction: column; align-items: center; justify-content: flex-start;
+            width: 100%; height: 100%; padding: 15px 20px 20px 20px;
             position: absolute; top: 0; left: 0;
             overflow-y: auto; overflow-x: hidden;
             background: transparent;
         }
         .scene.active { display: flex; z-index: 10; }
 
-        h1, h2, h3 { font-family: var(--font-retro); color: var(--white); text-align: center; margin-bottom: 10px; text-shadow: 2px 2px 0px #000; line-height: 1.4; }
-        h1 { font-size: 1.15rem; }
-        h2 { font-size: 1rem; }
-        p { text-align: center; font-size: 0.95rem; margin-bottom: 8px; font-weight: 800; color: var(--white); text-shadow: 2px 2px 0px #000; }
+        h1, h2, h3 { font-family: var(--font-retro); color: var(--white); text-align: center; margin-top: 5px; margin-bottom: 8px; text-shadow: 2px 2px 0px #000; line-height: 1.3; }
+        h1 { font-size: 1.1rem; }
+        h2 { font-size: 0.95rem; }
+        p { text-align: center; font-size: 0.9rem; margin-bottom: 6px; font-weight: 800; color: var(--white); text-shadow: 2px 2px 0px #000; }
 
         .btn {
-            background-color: var(--mario-red); color: var(--white); border: 3px solid #000; padding: 10px 18px;
-            font-family: var(--font-retro); font-size: 0.7rem; cursor: pointer; box-shadow: inset -3px -3px 0px rgba(0,0,0,0.3);
+            background-color: var(--mario-red); color: var(--white); border: 3px solid #000; padding: 9px 16px;
+            font-family: var(--font-retro); font-size: 0.65rem; cursor: pointer; box-shadow: inset -3px -3px 0px rgba(0,0,0,0.3);
             text-transform: uppercase; transition: transform 0.1s; display: inline-flex; align-items: center; justify-content: center;
-            margin-top: 10px; text-shadow: 1px 1px 0px #000;
+            margin-top: 8px; text-shadow: 1px 1px 0px #000;
         }
         .btn:active { transform: scale(0.95); box-shadow: inset 3px 3px 0px rgba(0,0,0,0.3); }
 
-        .password-display { display: flex; gap: 6px; margin: 6px 0 10px; justify-content: center; }
+        .password-display { display: flex; gap: 6px; margin: 4px 0 8px; justify-content: center; }
         .pwd-box {
-            width: 38px; height: 38px; background: var(--mario-yellow); border: 3px solid #000;
-            display: flex; align-items: center; justify-content: center; font-family: var(--font-retro); font-size: 15px; color: #000;
+            width: 36px; height: 36px; background: var(--mario-yellow); border: 3px solid #000;
+            display: flex; align-items: center; justify-content: center; font-family: var(--font-retro); font-size: 14px; color: #000;
             box-shadow: inset -3px -3px 0px #c5a600;
         }
-        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: 80%; max-width: 200px; margin: 0 auto; }
+        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; width: 80%; max-width: 190px; margin: 0 auto; }
         .key {
-            width: 42px; height: 42px; background: var(--mario-brown); border: 3px solid #000;
-            display: flex; align-items: center; justify-content: center; font-family: var(--font-retro); font-size: 0.9rem; color: var(--white);
+            width: 39px; height: 39px; background: var(--mario-brown); border: 3px solid #000;
+            display: flex; align-items: center; justify-content: center; font-family: var(--font-retro); font-size: 0.85rem; color: var(--white);
             cursor: pointer; margin: 0 auto; box-shadow: inset -3px -3px 0px #5c2c09; text-shadow: 2px 2px 0px #000;
         }
         .key:active { transform: scale(0.9); box-shadow: inset 3px 3px 0px #5c2c09; }
@@ -204,36 +213,36 @@
         @keyframes shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-10px); } 40%, 80% { transform: translateX(10px); } }
 
         .calendar-card {
-            background: #fff; border: 5px solid #000; padding: 12px; box-shadow: 6px 6px 0px rgba(0,0,0,0.5); width: 85%; max-width: 300px; margin: 0 auto 10px auto;
+            background: #fff; border: 5px solid #000; padding: 10px; box-shadow: 6px 6px 0px rgba(0,0,0,0.5); width: 85%; max-width: 280px; margin: 5px auto 8px auto;
         }
         .cal-header {
-            background: var(--mario-red); color: white; padding: 8px; font-family: var(--font-retro); font-size: 0.7rem; text-align: center;
-            border: 3px solid #000; margin-bottom: 8px; text-shadow: 1px 1px 0px #000;
+            background: var(--mario-red); color: white; padding: 6px; font-family: var(--font-retro); font-size: 0.65rem; text-align: center;
+            border: 3px solid #000; margin-bottom: 6px; text-shadow: 1px 1px 0px #000;
         }
-        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-family: var(--font-body); font-weight: bold; color: #000;}
-        .cal-day-name { font-size: 0.7rem; margin-bottom: 3px; color: #666;}
-        .cal-date { padding: 5px 0; font-size: 0.85rem; position: relative;}
+        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; text-align: center; font-family: var(--font-body); font-weight: bold; color: #000;}
+        .cal-day-name { font-size: 0.65rem; margin-bottom: 2px; color: #666;}
+        .cal-date { padding: 4px 0; font-size: 0.8rem; position: relative;}
         .cal-date.special { background: var(--mario-yellow); border: 2px solid #000; color: #000; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
-        .hearts-container { display: flex; gap: 12px; margin: 15px auto; justify-content: center; }
+        .hearts-container { display: flex; gap: 10px; margin: 10px auto; justify-content: center; }
         .mario-block {
-            width: 50px; height: 50px; background: var(--mario-yellow); border: 3px solid #000; display: flex; align-items: center; justify-content: center;
-            font-family: var(--font-retro); font-size: 20px; color: #c5a600; cursor: pointer; box-shadow: inset -3px -3px 0px #c5a600; transition: transform 0.1s;
+            width: 45px; height: 45px; background: var(--mario-yellow); border: 3px solid #000; display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-retro); font-size: 18px; color: #c5a600; cursor: pointer; box-shadow: inset -3px -3px 0px #c5a600; transition: transform 0.1s;
         }
-        .mario-block.active { background: #a06b3a; color: transparent; box-shadow: inset 3px 3px 0px #614022; transform: translateY(-8px); }
+        .mario-block.active { background: #a06b3a; color: transparent; box-shadow: inset 3px 3px 0px #614022; transform: translateY(-6px); }
         .secret-paper {
-            background: #fff; padding: 15px; border: 5px solid #000; margin: 0 auto 10px auto; display: none; width: 90%; max-width: 320px; box-shadow: 6px 6px 0px rgba(0,0,0,0.5);
+            background: #fff; padding: 12px; border: 5px solid #000; margin: 0 auto 8px auto; display: none; width: 90%; max-width: 300px; box-shadow: 6px 6px 0px rgba(0,0,0,0.5);
         }
-        .secret-paper p { color: #000; text-shadow: none; font-family: var(--font-body); font-size: 0.95rem; text-align: left; }
+        .secret-paper p { color: #000; text-shadow: none; font-family: var(--font-body); font-size: 0.9rem; text-align: left; }
         .secret-paper.show { display: block; animation: popUp 0.3s forwards; }
         @keyframes popUp { 0% { transform: scale(0.5); } 100% { transform: scale(1); } }
 
-        .letter-container { background: #fff; width: 90%; max-width: 330px; height: 38vh; border: 5px solid #000; padding: 12px; box-shadow: 6px 6px 0px rgba(0,0,0,0.5); overflow-y: auto; margin: 0 auto; }
-        .typewriter-text { font-family: var(--font-retro); font-size: 0.65rem; line-height: 1.6; color: #000; text-shadow: none; min-height: 100%; text-align: left; }
+        .letter-container { background: #fff; width: 90%; max-width: 310px; height: 35vh; border: 5px solid #000; padding: 10px; box-shadow: 6px 6px 0px rgba(0,0,0,0.5); overflow-y: auto; margin: 0 auto; }
+        .typewriter-text { font-family: var(--font-retro); font-size: 0.6rem; line-height: 1.5; color: #000; text-shadow: none; min-height: 100%; text-align: left; }
         .typing-cursor::after { content: '█'; animation: blink 1s step-end infinite; }
 
-        .video-wrapper { width: 90%; max-width: 300px; background: #fff; padding: 10px; border: 5px solid #000; box-shadow: 6px 6px 0px rgba(0,0,0,0.5); margin: 0 auto 10px auto; position: relative; }
+        .video-wrapper { width: 90%; max-width: 280px; background: #fff; padding: 8px; border: 5px solid #000; box-shadow: 6px 6px 0px rgba(0,0,0,0.5); margin: 0 auto 8px auto; position: relative; }
         .iframe-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 3px solid #000; }
         .iframe-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;}
 
@@ -244,25 +253,25 @@
             border: 2px solid #000;
             cursor: pointer;
         }
-        .mystery-cover span { font-family: var(--font-retro); font-size: 32px; color: #8B4513; text-shadow: 2px 2px 0 #000; }
-        .mystery-cover p { font-family: var(--font-body); font-size: 0.8rem; color: #000; text-shadow: none; margin-top: 5px; margin-bottom: 0; }
+        .mystery-cover span { font-family: var(--font-retro); font-size: 28px; color: #8B4513; text-shadow: 2px 2px 0 #000; }
+        .mystery-cover p { font-family: var(--font-body); font-size: 0.75rem; color: #000; text-shadow: none; margin-top: 4px; margin-bottom: 0; }
         .iframe-container.revealed .mystery-cover { display: none; }
 
         .cw-container { width: 100%; display: flex; flex-direction: column; align-items: center; padding-bottom: 10px;}
-        .cw-board { position: relative; padding: 5px; margin: 0 auto 10px auto; display: grid; gap: 0px; background-color: transparent; }
-        .cw-cell { width: 26px; height: 26px; background: transparent; position: relative; }
+        .cw-board { position: relative; padding: 4px; margin: 0 auto 8px auto; display: grid; gap: 0px; background-color: transparent; }
+        .cw-cell { width: 24px; height: 24px; background: transparent; position: relative; }
         .cw-input {
-            width: 100%; height: 100%; background: #fff; border: 2px solid #000; text-align: center; font-size: 0.8rem; font-family: var(--font-retro);
+            width: 100%; height: 100%; background: #fff; border: 2px solid #000; text-align: center; font-size: 0.75rem; font-family: var(--font-retro);
             font-weight: bold; color: #000; text-transform: uppercase; outline: none; caret-color: var(--mario-red); padding: 0; border-radius: 0;
         }
         .cw-input:focus { background: var(--mario-yellow); box-shadow: inset 0 0 0 2px var(--mario-red); z-index: 5; position: relative;}
         .cw-input.correct { background: var(--mario-green); color: #fff; }
-        .cw-num { position: absolute; top: 1px; left: 1px; font-size: 7px; font-family: var(--font-body); font-weight: bold; color: #000; z-index: 2; pointer-events: none;}
-        .cw-clues { width: 90%; max-width: 310px; background: #fff; padding: 10px; border: 4px solid #000; font-family: var(--font-body); font-size: 0.75rem; color: #000; box-shadow: 5px 5px 0px rgba(0,0,0,0.5); margin: 0 auto;}
-        .cw-clues h4 { color: var(--mario-red); margin-bottom: 3px; font-family: var(--font-retro); font-size: 0.55rem; text-shadow: none;}
-        .cw-clues ul { list-style: none; padding-left: 0; margin-bottom: 5px; text-align: left;}
-        .cw-clues li { margin-bottom: 3px; font-weight: bold;}
-        .dir-badge { background: var(--mario-blue); color: white; border: 3px solid #000; padding: 5px 10px; font-family: var(--font-retro); font-size: 0.55rem; margin-bottom: 6px; text-shadow: 1px 1px 0px #000; }
+        .cw-num { position: absolute; top: 1px; left: 1px; font-size: 6.5px; font-family: var(--font-body); font-weight: bold; color: #000; z-index: 2; pointer-events: none;}
+        .cw-clues { width: 90%; max-width: 290px; background: #fff; padding: 8px; border: 4px solid #000; font-family: var(--font-body); font-size: 0.7rem; color: #000; box-shadow: 5px 5px 0px rgba(0,0,0,0.5); margin: 0 auto;}
+        .cw-clues h4 { color: var(--mario-red); margin-bottom: 2px; font-family: var(--font-retro); font-size: 0.5rem; text-shadow: none;}
+        .cw-clues ul { list-style: none; padding-left: 0; margin-bottom: 4px; text-align: left;}
+        .cw-clues li { margin-bottom: 2px; font-weight: bold;}
+        .dir-badge { background: var(--mario-blue); color: white; border: 3px solid #000; padding: 4px 8px; font-family: var(--font-retro); font-size: 0.5rem; margin-bottom: 5px; text-shadow: 1px 1px 0px #000; }
     </style>
 </head>
 <body>
@@ -280,11 +289,14 @@
     <div class="mario-pipe-top"></div>
     <div class="mario-pipe"></div>
     
-    <!-- DEKORASI BATA & BALOK -->
-    <div class="decor-bricks">
-        <div class="retro-brick"></div>
-        <div class="retro-question-block">?</div>
-        <div class="retro-brick"></div>
+    <!-- 5 DEKORASI BATA & BOX TANDA TANYA SPESIFIK -->
+    <div class="decor-bricks-group">
+        <div class="retro-brick rb-1"></div>
+        <div class="retro-question-block rq-1">?</div>
+        <div class="retro-brick rb-2"></div>
+        <div class="retro-question-block rq-2">?</div>
+        <div class="retro-brick rb-3"></div>
+        <div class="retro-question-block rq-top">?</div>
     </div>
 
     <div class="bg-decorations" id="bg-decor"></div>
@@ -297,9 +309,9 @@
         
         <div class="scene active" id="scene-1">
             <h1>LEVEL 1:<br>SECRET DOOR✨️</h1>
-            <p style="font-family: var(--font-body); font-weight: bold; margin-bottom: 3px;">Selesaikan untuk masuk!</p>
+            <p style="font-family: var(--font-body); font-weight: bold; margin-bottom: 2px;">Selesaikan untuk masuk!</p>
             
-            <p style="font-family: var(--font-retro); font-size: 0.65rem; margin-top: 3px; margin-bottom: 3px; color: var(--mario-yellow);">ENTER CODE</p>
+            <p style="font-family: var(--font-retro); font-size: 0.6rem; margin-top: 2px; margin-bottom: 2px; color: var(--mario-yellow);">ENTER CODE</p>
             <div class="password-display" id="pwd-display">
                 <div class="pwd-box" id="pb-0"></div>
                 <div class="pwd-box" id="pb-1"></div>
@@ -322,7 +334,7 @@
                 <div class="key action" onclick="inputPwd('B')">⌫</div>
             </div>
 
-            <p id="pwd-msg" style="margin-top: 6px; color: var(--mario-yellow); min-height: 30px; transition: opacity 0.3s; opacity: 0; font-family: var(--font-body); line-height: 1.2; font-size: 0.85rem;"></p>
+            <p id="pwd-msg" style="margin-top: 5px; color: var(--mario-yellow); min-height: 25px; transition: opacity 0.3s; opacity: 0; font-family: var(--font-body); line-height: 1.1; font-size: 0.8rem;"></p>
             <button class="btn" id="btn-s1" style="display: none; background: var(--mario-green);" onclick="openSurpriseAndPlayMusic()">PRESS START ▶</button>
         </div>
 
@@ -355,7 +367,7 @@
                 <p>
                     Hi birthday boy...<br><br>Welcome to your personal game! Get ready for the next stage. ♡
                 </p>
-                <div style="text-align: center; margin-top: 10px;">
+                <div style="text-align: center; margin-top: 8px;">
                     <button class="btn" onclick="triggerPageTransition(3, 4)">NEXT LEVEL</button>
                 </div>
             </div>
@@ -364,7 +376,7 @@
         <div class="scene" id="scene-4">
             <h1>MESSAGE FROM<br>BOLI💌</h1>
             
-            <img src="https://iili.io/CwuwFDB.jpg" style="width: 120px; max-width: 40%; border: 4px solid #000; box-shadow: 6px 6px 0px rgba(0,0,0,0.5); margin-bottom: 8px; border-radius: 4px; display: block; margin-left: auto; margin-right: auto;" alt="Us">
+            <img src="https://iili.io/CwuwFDB.jpg" style="width: 100px; max-width: 35%; border: 4px solid #000; box-shadow: 6px 6px 0px rgba(0,0,0,0.5); margin-bottom: 6px; border-radius: 4px; display: block; margin-left: auto; margin-right: auto;" alt="Us">
 
             <div class="letter-container">
                 <div class="typewriter-text" id="tw-text"></div>
@@ -375,7 +387,7 @@
 
         <div class="scene" id="scene-5">
             <h1>MAIN STAGE🎶📼</h1>
-            <p style="font-family: var(--font-body); font-size: 0.9rem;">This reminds me of you...</p>
+            <p style="font-family: var(--font-body); font-size: 0.85rem;">This reminds me of you...</p>
             
             <div class="video-wrapper">
                 <div class="iframe-container" id="yt-box">
@@ -387,7 +399,7 @@
                 </div>
             </div>
 
-            <p id="yt-notice" style="font-family: var(--font-body); font-size: 0.8rem; color: var(--mario-yellow);">🔒 Tonton videonya sampai selesai untuk lanjut</p>
+            <p id="yt-notice" style="font-family: var(--font-body); font-size: 0.75rem; color: var(--mario-yellow);">🔒 Tonton videonya sampai selesai untuk lanjut</p>
             <button class="btn" id="btn-s5" style="display: none; background: var(--mario-green);" onclick="triggerPageTransition(5, 6)">FINAL BOSS⚔️</button>
         </div>
 
@@ -405,20 +417,20 @@
                     <ul id="cw-down-list"></ul>
                 </div>
                 
-                <h2 id="cw-win-msg" style="display:none; color: var(--mario-yellow); margin-top: 10px;">QUEST COMPLETE👑</h2>
-                <button class="btn" id="btn-s6" style="display: none; background: var(--mario-green); margin-top: 8px;" onclick="triggerPageTransition(6, 7)">VIEW ENDING</button>
+                <h2 id="cw-win-msg" style="display:none; color: var(--mario-yellow); margin-top: 8px;">QUEST COMPLETE👑</h2>
+                <button class="btn" id="btn-s6" style="display: none; background: var(--mario-green); margin-top: 6px;" onclick="triggerPageTransition(6, 7)">VIEW ENDING</button>
             </div>
         </div>
 
         <div class="scene" id="scene-7">
-            <h1 style="font-size: 2rem; color: var(--mario-yellow);">YOU WIN!🥇🏆</h1>
+            <h1 style="font-size: 1.8rem; color: var(--mario-yellow);">YOU WIN!🥇🏆</h1>
             
             <div style="display: flex; gap: 15px; margin-top: 10px; align-items: flex-end; justify-content: center;">
-                <img src="https://media.tenor.com/2RoR1_D7N3sAAAAi/mario-running.gif" style="height: 90px; transform: scaleX(-1);" alt="Mario">
-                <img src="https://media.tenor.com/Vb8xokYyvP0AAAAj/peach-princess-peach.gif" style="height: 100px;" alt="Peach">
+                <img src="https://media.tenor.com/2RoR1_D7N3sAAAAi/mario-running.gif" style="height: 80px; transform: scaleX(-1);" alt="Mario">
+                <img src="https://media.tenor.com/Vb8xokYyvP0AAAAj/peach-princess-peach.gif" style="height: 90px;" alt="Peach">
             </div>
 
-            <button class="btn" style="background: var(--mario-green); margin-top: 25px; font-size: 0.9rem;" onclick="location.reload()">REPLAY GAME ↺</button>
+            <button class="btn" style="background: var(--mario-green); margin-top: 20px; font-size: 0.85rem;" onclick="location.reload()">REPLAY GAME ↺</button>
         </div>
 
     </div>
@@ -524,94 +536,121 @@
             const overlay = document.getElementById('transition-overlay');
             overlay.style.zIndex = "9999";
 
+            // 1. TRANSISI SCENE 1 KE 2: Tirai Tertutup Warna Merah
             if (fromNum === 1 && toNum === 2) {
-                overlay.innerHTML = `
-                    <div style="position:absolute;inset:0;background:rgba(0,0,0,0);overflow:hidden;pointer-events:none;">
-                        <img src="https://media.tenor.com/2RoR1_D7N3sAAAAi/mario-running.gif"
-                            style="position:absolute;bottom:24px;left:-120px;width:80px;animation:marioRealRun 1.8s linear forwards;">
-                    </div>`;
                 const s = document.createElement('style');
-                s.id = 'marioRunCSS';
-                s.textContent = `@keyframes marioRealRun { 0% { left: -120px; } 100% { left: 110vw; } }`;
+                s.id = 'curtainCSS';
+                s.textContent = `
+                    @keyframes curtainLeft { 0% { transform: translateX(-100%); } 50%, 75% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+                    @keyframes curtainRight { 0% { transform: translateX(100%); } 50%, 75% { transform: translateX(0); } 100% { transform: translateX(100%); } }
+                `;
                 document.head.appendChild(s);
-
-                setTimeout(() => switchSceneDOM(current, next, toNum), 900);
-                setTimeout(() => {
-                    overlay.innerHTML = '';
-                    const old = document.getElementById('marioRunCSS');
-                    if (old) old.remove();
-                    isAnimating = false;
-                }, 1900);
-
-            } else if (fromNum === 2 && toNum === 3) {
                 overlay.innerHTML = `
-                    <div style="position:relative;display:flex;align-items:center;justify-content:center;">
-                        <div style="position:absolute;width:50px;height:50px;border-radius:50%;
-                            background:#E52521;transform:translate(-50%,-50%) scale(0);
-                            top:50%;left:50%;animation:circleGrow 1.6s ease-in-out forwards;z-index:0;"></div>
-                        <div style="font-size:70px;animation:mushroomGrowAnim 1.6s ease-in-out forwards;position:relative;z-index:1;">🍄</div>
+                    <div style="position:absolute;inset:0;display:flex;overflow:hidden;pointer-events:none;">
+                        <div style="width:50%;height:100%;background:#E52521;border-right:4px solid #000;animation:curtainLeft 1.6s ease-in-out forwards;"></div>
+                        <div style="width:50%;height:100%;background:#E52521;border-left:4px solid #000;animation:curtainRight 1.6s ease-in-out forwards;"></div>
                     </div>`;
                 setTimeout(() => switchSceneDOM(current, next, toNum), 800);
-                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1600);
+                setTimeout(() => {
+                    overlay.innerHTML = '';
+                    const old = document.getElementById('curtainCSS');
+                    if (old) old.remove();
+                    isAnimating = false;
+                }, 1600);
 
+            // 2. TRANSISI SCENE 2 KE 3: Hujan Emotikon Jamur Penuh Menutupi Layar
+            } else if (fromNum === 2 && toNum === 3) {
+                const s = document.createElement('style');
+                s.id = 'shroomRainCSS';
+                s.textContent = `
+                    @keyframes rainFall { 0% { transform: translateY(-10vh); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(110vh); opacity: 1; } }
+                `;
+                document.head.appendChild(s);
+                let rainHTML = '';
+                for(let i=0; i<35; i++) {
+                    const leftPos = Math.random() * 100;
+                    const animDur = 0.6 + Math.random() * 0.6;
+                    const animDelay = Math.random() * 0.4;
+                    const sz = 24 + Math.random() * 16;
+                    rainHTML += `<div style="position:absolute;left:${leftPos}vw;top:-10vh;font-size:${sz}px;animation:rainFall ${animDur}s linear ${animDelay}s forwards;">🍄</div>`;
+                }
+                overlay.innerHTML = `<div style="position:absolute;inset:0;background:rgba(92,148,252,0.85);overflow:hidden;pointer-events:none;">${rainHTML}</div>`;
+                setTimeout(() => switchSceneDOM(current, next, toNum), 700);
+                setTimeout(() => {
+                    overlay.innerHTML = '';
+                    const old = document.getElementById('shroomRainCSS');
+                    if (old) old.remove();
+                    isAnimating = false;
+                }, 1400);
+
+            // 3. TRANSISI SCENE 3 KE 4: Coin Spin Burst (Koin Berputar Meledak Jadi Partikel)
             } else if (fromNum === 3 && toNum === 4) {
                 const s = document.createElement('style');
                 s.textContent = `
-                    @keyframes coinSpin{0%{transform:scale(0) rotateY(0deg);opacity:1}40%{transform:scale(5) rotateY(360deg);opacity:1}60%{transform:scale(5) rotateY(360deg);opacity:1}100%{transform:scale(0) rotateY(720deg);opacity:0}}
-                    @keyframes coinPart{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}`;
+                    @keyframes coinSpinBurst { 0% { transform: scale(0) rotateY(0deg); opacity: 1; } 40% { transform: scale(4) rotateY(360deg); opacity: 1; } 70% { transform: scale(4) rotateY(720deg); opacity: 1; } 100% { transform: scale(0) rotateY(1080deg); opacity: 0; } }
+                    @keyframes partFly { 0% { transform: translate(0,0) scale(1); opacity: 1; } 100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; } }
+                `;
                 document.head.appendChild(s);
                 let pHTML = '';
-                for (let i = 0; i < 10; i++) {
-                    const angle = (i / 10) * 360;
-                    const dist = 90 + Math.random() * 50;
+                for (let i = 0; i < 15; i++) {
+                    const angle = (i / 15) * 360;
+                    const dist = 100 + Math.random() * 80;
                     const tx = Math.round(Math.cos(angle * Math.PI / 180) * dist);
                     const ty = Math.round(Math.sin(angle * Math.PI / 180) * dist);
-                    const em = ['🪙','⭐','✨','💛','🌟'][i % 5];
-                    pHTML += `<div style="position:absolute;font-size:18px;--tx:${tx}px;--ty:${ty}px;animation:coinPart 0.8s ease-out 0.4s forwards;">${em}</div>`;
+                    pHTML += `<div style="position:absolute;font-size:20px;--tx:${tx}px;--ty:${ty}px;animation:partFly 0.9s ease-out 0.3s forwards;">🪙</div>`;
                 }
                 overlay.innerHTML = `
-                    <div style="position:relative;display:flex;align-items:center;justify-content:center;width:200px;height:200px;">
+                    <div style="position:relative;display:flex;align-items:center;justify-content:center;width:100%;height:100%;">
                         ${pHTML}
-                        <div style="font-size:72px;animation:coinSpin 1.6s ease-in-out forwards;position:relative;z-index:1;">🪙</div>
+                        <div style="font-size:75px;animation:coinSpinBurst 1.5s ease-in-out forwards;position:relative;z-index:1;">🪙</div>
                     </div>`;
-                setTimeout(() => switchSceneDOM(current, next, toNum), 800);
-                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1700);
+                setTimeout(() => switchSceneDOM(current, next, toNum), 750);
+                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1500);
 
+            // 4. TRANSISI SCENE 4 KE 5: Star Warp Power✩ (Bintang dengan Cincin Meluap + Sparkle)
             } else if (fromNum === 4 && toNum === 5) {
                 const s = document.createElement('style');
                 s.textContent = `
-                    @keyframes starSpin{0%{transform:scale(0) rotate(0deg);opacity:1}35%{transform:scale(5) rotate(180deg);opacity:1}60%{transform:scale(5) rotate(360deg);opacity:1}100%{transform:scale(0) rotate(540deg);opacity:0}}
-                    @keyframes ringOut{0%{transform:translate(-50%,-50%) scale(0);opacity:.9}100%{transform:translate(-50%,-50%) scale(9);opacity:0}}`;
+                    @keyframes starWarpSpin { 0% { transform: scale(0) rotate(0deg); opacity: 1; } 40% { transform: scale(4.5) rotate(180deg); opacity: 1; } 70% { transform: scale(4.5) rotate(360deg); opacity: 1; } 100% { transform: scale(0) rotate(540deg); opacity: 0; } }
+                    @keyframes ringExpand { 0% { transform: translate(-50%,-50%) scale(0); opacity: 1; border-color: #FBD000; } 100% { transform: translate(-50%,-50%) scale(8); opacity: 0; border-color: #FFF; } }
+                `;
                 document.head.appendChild(s);
                 overlay.innerHTML = `
-                    <div style="position:relative;width:200px;height:200px;display:flex;align-items:center;justify-content:center;">
-                        <div style="position:absolute;top:50%;left:50%;width:60px;height:60px;border-radius:50%;border:6px solid #FBD000;animation:ringOut 1s ease-out 0s forwards;"></div>
-                        <div style="position:absolute;top:50%;left:50%;width:60px;height:60px;border-radius:50%;border:6px solid #FBD000;animation:ringOut 1s ease-out 0.2s forwards;"></div>
-                        <div style="position:absolute;top:50%;left:50%;width:60px;height:60px;border-radius:50%;border:6px solid #FBD000;animation:ringOut 1s ease-out 0.4s forwards;"></div>
-                        <div style="font-size:80px;position:relative;z-index:2;animation:starSpin 1.6s ease-in-out forwards;">⭐</div>
+                    <div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+                        <div style="position:absolute;top:50%;left:50%;width:70px;height:70px;border-radius:50%;border:8px solid #FBD000;animation:ringExpand 1s ease-out 0s forwards;"></div>
+                        <div style="position:absolute;top:50%;left:50%;width:70px;height:70px;border-radius:50%;border:8px solid #FBD000;animation:ringExpand 1s ease-out 0.25s forwards;"></div>
+                        <div style="position:absolute;top:50%;left:50%;width:70px;height:70px;border-radius:50%;border:8px solid #FBD000;animation:ringExpand 1s ease-out 0.5s forwards;"></div>
+                        <div style="font-size:85px;position:relative;z-index:2;animation:starWarpSpin 1.5s ease-in-out forwards;">⭐</div>
                     </div>`;
-                setTimeout(() => switchSceneDOM(current, next, toNum), 850);
-                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1700);
+                setTimeout(() => switchSceneDOM(current, next, toNum), 750);
+                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1500);
 
+            // 5. TRANSISI SCENE 5 KE 6: Pipa Ala Mario Bros Muncul dari Bawah ke Atas Menutupi Seluruh Layar
             } else if (fromNum === 5 && toNum === 6) {
                 const s = document.createElement('style');
                 s.textContent = `
-                    @keyframes chompT{0%{transform:translateY(-110%)}35%{transform:translateY(0)}65%{transform:translateY(0)}100%{transform:translateY(-110%)}}
-                    @keyframes chompB{0%{transform:translateY(110%)}35%{transform:translateY(0)}65%{transform:translateY(0)}100%{transform:translateY(110%)}}`;
+                    @keyframes pipeRiseCover { 0% { transform: translateY(100%); } 45%, 65% { transform: translateY(0); } 100% { transform: translateY(-100%); } }
+                `;
                 document.head.appendChild(s);
                 overlay.innerHTML = `
-                    <div style="position:absolute;inset:0;overflow:hidden;">
-                        <div style="position:absolute;top:0;left:0;right:0;height:50%;background:#229024;border-bottom:8px solid #145214;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;font-size:56px;animation:chompT 1.6s ease-in-out forwards;">🌿</div>
-                        <div style="position:absolute;bottom:0;left:0;right:0;height:50%;background:#229024;border-top:8px solid #145214;display:flex;align-items:flex-start;justify-content:center;padding-top:8px;font-size:56px;animation:chompB 1.6s ease-in-out forwards;">🌿</div>
+                    <div style="position:absolute;inset:0;background:#43B047;border-top:8px solid #000;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;animation:pipeRiseCover 1.8s ease-in-out forwards;z-index:9999;">
+                        <div style="width:120%;height:40px;background:#43B047;border:4px solid #000;border-bottom:none;"></div>
                     </div>`;
-                setTimeout(() => switchSceneDOM(current, next, toNum), 800);
-                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1700);
+                setTimeout(() => switchSceneDOM(current, next, toNum), 900);
+                setTimeout(() => {
+                    overlay.innerHTML = '';
+                    const old = document.getElementById('pipeCSS');
+                    if (old) old.remove();
+                    isAnimating = false;
+                }, 1800);
 
+            // 6. TRANSISI SCENE 6 KE 7 (ENDING / WIN)
             } else if (fromNum === 6 && toNum === 7) {
                 const s = document.createElement('style');
                 s.textContent = `
-                    @keyframes flagSlide{0%{transform:translateY(-100vh);opacity:1}40%{transform:translateY(0);opacity:1}70%{transform:translateY(0);opacity:1}100%{transform:translateY(100vh);opacity:0}}
-                    @keyframes fwPop{0%{transform:translate(var(--fx),var(--fy)) scale(0);opacity:1}50%{transform:translate(var(--fx),var(--fy)) scale(1.2);opacity:1}100%{transform:translate(var(--fx),var(--fy)) scale(0);opacity:0}}`;
+                    @keyframes flagSlide { 0% { transform: translateY(-100vh); opacity: 1; } 40% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(100vh); opacity: 0; } }
+                    @keyframes fwPop { 0% { transform: translate(var(--fx),var(--fy)) scale(0); opacity: 1; } 50% { transform: translate(var(--fx),var(--fy)) scale(1.2); opacity: 1; } 100% { transform: translate(var(--fx),var(--fy)) scale(0); opacity: 0; } }
+                `;
                 document.head.appendChild(s);
                 let fw = '';
                 ['🎆','✨','⭐','🎇','💥','🌟','🎉'].forEach((e, i) => {
@@ -630,9 +669,9 @@
                 setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 2100);
 
             } else {
-                overlay.innerHTML = '<div class="pipe-wipe"></div>';
-                setTimeout(() => switchSceneDOM(current, next, toNum), 700);
-                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1400);
+                overlay.innerHTML = '<div style="position:absolute;inset:0;background:#5C94FC;"></div>';
+                setTimeout(() => switchSceneDOM(current, next, toNum), 500);
+                setTimeout(() => { overlay.innerHTML = ''; isAnimating = false; }, 1000);
             }
         }
 
@@ -688,7 +727,7 @@
                 document.getElementById('btn-s1').style.display = "inline-flex";
             } else {
                 displayObj.classList.add('shake');
-                msgObj.innerHTML = "INCORRECT!💀<br><span style='font-size:0.8rem; color:var(--white); font-weight:normal;'>Oopss... tanggal lahir kamu (DDMM)</span>";
+                msgObj.innerHTML = "INCORRECT!💀<br><span style='font-size:0.75rem; color:var(--white); font-weight:normal;'>Oopss... tanggal lahir kamu (DDMM)</span>";
                 msgObj.style.opacity = 1;
                 msgObj.style.color = "#000";
                 setTimeout(function() {
@@ -737,7 +776,7 @@
                     let el = elements[index];
                     if (el.type === 'char') container.innerHTML += el.val; else if (el.type === 'br') container.innerHTML += '<br>';
                     container.parentElement.scrollTop = container.parentElement.scrollHeight;
-                    index++; setTimeout(typeNext, 40);
+                    index++; setTimeout(typeNext, 35);
                 } else {
                     container.classList.remove('typing-cursor');
                     document.getElementById('btn-s4').style.opacity = 1;
