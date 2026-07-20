@@ -40,13 +40,43 @@
             position: relative;
         }
 
+        /* --- DEKORASI LATAR BELAKANG (TANAH, RUMPUT, PIPA, AWAN, ITEM JATUH) --- */
         .bg-decorations {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 0;
+            z-index: 1;
         }
 
+        /* Tanah & Garis Rumput Hijau di Bawah */
+        .ground-base {
+            position: fixed;
+            bottom: 0; left: 0; width: 100%; height: 60px;
+            background: #D2691E;
+            border-top: 6px solid #43B047;
+            z-index: 1;
+        }
+
+        /* Pipa Hijau Ala Mario */
+        .mario-pipe {
+            position: fixed;
+            bottom: 60px; right: 10%;
+            width: 60px; height: 50px;
+            background: #43B047;
+            border: 3px solid #000;
+            border-bottom: none;
+            z-index: 2;
+        }
+        .mario-pipe-top {
+            position: fixed;
+            bottom: 106px; right: calc(10% - 4px);
+            width: 68px; height: 20px;
+            background: #43B047;
+            border: 3px solid #000;
+            z-index: 2;
+        }
+
+        /* Animasi Item Jatuh dari Atas ke Bawah */
         .floating-item {
             position: absolute; 
             top: -5vh; 
@@ -54,6 +84,7 @@
             opacity: 0.7;
             animation: floatDown linear infinite; 
             filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.5));
+            z-index: 1;
         }
         @keyframes floatDown {
             0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0; }
@@ -62,13 +93,15 @@
             100% { transform: translateY(110vh) scale(1.2) rotate(20deg); opacity: 0; }
         }
 
+        /* Animasi Awan Bergerak dari Kiri ke Kanan */
         .cloud-item {
             position: absolute; 
             left: -10vw; 
             font-size: 35px; 
-            opacity: 0.9;
+            opacity: 0.8;
             animation: moveRight linear infinite; 
             filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.3));
+            z-index: 1;
         }
         @keyframes moveRight {
             0% { transform: translateX(0); opacity: 0; }
@@ -77,15 +110,16 @@
             100% { transform: translateX(120vw); opacity: 0; }
         }
 
+        /* Posisi Mario Agar Pas Napak di Atas Garis Rumput */
         .mario-corner-container {
             position: fixed;
-            left: -17px;
-            bottom: 75px;
+            left: 15px;
+            bottom: 56px; /* Pas di atas garis rumput */
             z-index: 20;
             pointer-events: none;
         }
         .mario-corner-gif {
-            width: 95px;
+            width: 75px;
             height: auto;
             image-rendering: pixelated;
         }
@@ -98,7 +132,7 @@
 
         #app-container {
             position: relative; width: 100%; height: 100%; max-width: 500px; 
-            margin: 0 auto; background-color: transparent; z-index: 2;
+            margin: 0 auto; background-color: transparent; z-index: 10;
             display: flex; flex-direction: column;
         }
         .scene {
@@ -106,7 +140,7 @@
             width: 100%; height: 100%; padding: 20px;
             position: absolute; top: 0; left: 0;
             overflow-y: auto; overflow-x: hidden;
-            background: url('data:image/svg+xml;utf8,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="20" fill="none"/><circle cx="2" cy="2" r="1" fill="rgba(255,255,255,0.2)"/></svg>');
+            background: transparent;
         }
         .scene.active { display: flex; z-index: 10; }
 
@@ -207,12 +241,22 @@
 <body>
 
     <div id="transition-overlay"></div>
+    
+    <!-- Audio Latar Belakang (Hanya Berjalan Saat Kode Benar) -->
+    <audio id="bg-music" loop>
+        <source src="https://www.dropbox.com/scl/fi/7sm934r67ibilxsipf09w/aud-20200808-wa0503_M94TamhK.mp3?rlkey=t5y6cgimg5ew8tn6cev63z0bp&st=regmda3j&dl=1" type="audio/mpeg">
+    </audio>
+
     <div id="yt-player" style="display: none; position: absolute; top: -9999px;"></div>
 
-    <div class="bg-decorations" id="bg-decor">
-        <div style="position:fixed;bottom:0;left:0;width:100%;height:50px;background:#D2691E;border-top:4px solid #558B2F;z-index:1;"></div>
-    </div>
+    <!-- DEKORASI LENGKAP: Tanah, Rumput, Pipa, Awan, Item Jatuh -->
+    <div class="ground-base"></div>
+    <div class="mario-pipe-top"></div>
+    <div class="mario-pipe"></div>
 
+    <div class="bg-decorations" id="bg-decor"></div>
+
+    <!-- MARIO DI POJOK (Napak di Rumput) -->
     <div class="mario-corner-container">
         <img src="https://iili.io/CwTDXCF.gif" alt="Mario" class="mario-corner-gif">
     </div>
@@ -368,6 +412,28 @@
             ]
         };
 
+        // --- GENERATOR DEKORASI AWAN & ITEM JATUH OTOMATIS ---
+        const bgContainer = document.getElementById('bg-decor');
+        const retroItems = ['⭐', '🍄', '❤️'];
+        for(let i=0; i<12; i++) {
+            let h = document.createElement('div');
+            h.innerHTML = retroItems[Math.floor(Math.random() * retroItems.length)];
+            h.className = 'floating-item';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            h.style.animationDelay = (Math.random() * 5) + 's';
+            bgContainer.appendChild(h);
+        }
+        for(let i=0; i<5; i++) {
+            let cloud = document.createElement('div');
+            cloud.innerHTML = '☁️';
+            cloud.className = 'cloud-item';
+            cloud.style.top = (Math.random() * 40) + 'vh'; 
+            cloud.style.animationDuration = (Math.random() * 15 + 20) + 's'; 
+            cloud.style.animationDelay = (Math.random() * 10) + 's';
+            bgContainer.appendChild(cloud);
+        }
+
         let ytVisualPlayer = null;
         let ytVisualReady = false;
 
@@ -391,13 +457,8 @@
             document.getElementById('yt-notice').style.color = 'var(--mario-green)';
         }
 
-        let ytPlayer;
+        let ytVisualPlayerInstance;
         function onYouTubeIframeAPIReady() {
-            ytPlayer = new YT.Player('yt-player', {
-                height: '0', width: '0', videoId: CONFIG.youtubeVideoId,
-                playerVars: { 'autoplay': 0, 'controls': 0, 'start': CONFIG.ytStart, 'end': CONFIG.ytEnd }
-            });
-
             ytVisualPlayer = new YT.Player('yt-visual', {
                 height: '100%', width: '100%', videoId: CONFIG.visualYouTubeId,
                 playerVars: {
@@ -414,10 +475,11 @@
             });
         }
 
+        // --- MUSIK HANYA JALAN PAS KODE BENAR (TIDAK BENTROK) ---
         function openSurpriseAndPlayMusic() {
-            if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
-                ytPlayer.playVideo();
-            }
+            const bgm = document.getElementById('bg-music');
+            bgm.volume = 0.5;
+            bgm.play().catch(function(e) { console.log('Autoplay blocked:', e); });
             triggerPageTransition(1, 2);
         }
 
@@ -558,13 +620,10 @@
             if (num === 4 && !letterTyped) typeLetter();
             if (num === 6 && !cwRendered) initCrossword();
             
+            const bgm = document.getElementById('bg-music');
             if (num === 5) {
-                const bgm = document.getElementById('bg-music');
                 bgm.pause();
-            }
-            
-            if (num === 6 || num === 7) {
-                const bgm = document.getElementById('bg-music');
+            } else if (num >= 2) {
                 bgm.play().catch(function(e) {});
             }
         }
@@ -598,11 +657,6 @@
                 msgObj.style.opacity = 1;
                 msgObj.style.color = "var(--mario-yellow)";
                 document.getElementById('btn-s1').style.display = "inline-flex";
-                
-                const bgm = document.getElementById('bg-music');
-                bgm.volume = 0.5;
-                bgm.play().catch(function(e) { console.log('Autoplay blocked:', e); });
-                
             } else {
                 displayObj.classList.add('shake');
                 msgObj.innerHTML = "INCORRECT!💀<br><span style='font-size:0.85rem; color:var(--white); font-weight:normal;'>Oopss... tanggal lahir kamu (DDMM)</span>";
@@ -768,8 +822,5 @@
             }
         }
     </script>
-    <audio id="bg-music" loop>
-        <source src="https://www.dropbox.com/scl/fi/7sm934r67ibilxsipf09w/aud-20200808-wa0503_M94TamhK.mp3?rlkey=t5y6cgimg5ew8tn6cev63z0bp&st=regmda3j&dl=1" type="audio/mpeg">
-    </audio>
 </body>
 </html>
